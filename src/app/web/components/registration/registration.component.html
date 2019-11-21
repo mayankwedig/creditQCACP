@@ -1,0 +1,500 @@
+<app-support-form></app-support-form>
+<button type="button" class="close" (click)="closePopup()">
+  <span aria-hidden="true">×</span>
+</button>
+<div class="display-flex">
+  <div class="lm-left">
+    <div class="login-logo">
+      <img width="189" height="103" src="assets/img/login-screen-logo.png" alt="CreditQ" />
+    </div>
+  </div>
+  <div class="lm-right">
+
+    <div class="form-heading margin_bottom20">SIGN UP</div>
+    <div class="modal-subheading"></div>
+    <div class="form-scroll">
+      <ng-container *ngIf="gstStep">
+        <form class="custom-form " name="gstFrm" #gstFrm="ngForm" (ngSubmit)="gstFrm.form.valid && submitGST()"
+          novalidate>
+          <div class="form-group">
+            <label>GST Number<span class="red">*</span></label>
+            <input type="text" name="txtGSTNo" (blur)="textChange();" [(ngModel)]="customerData.gst_no"
+              class="form-control" #txtGSTNo="ngModel" placeholder="Enter GST No" required>
+            <div *ngIf="txtGSTNo.invalid && (txtGSTNo.dirty || txtGSTNo.touched )" class="alert alert-error-message">
+              <ng-container *ngIf="txtGSTNo.errors?.required">GST No is required</ng-container>
+            </div>
+            <div *ngIf="errorMessage != ''" class="alert alert-error-message">
+              <ng-container>{{errorMessage}}</ng-container>
+            </div>
+          </div>
+          <div class="form-group margin_top30">
+            <button type="submit" [disabled]='!gstFrm.form.valid' class="blue-btn full-width-btn">Proceed</button>
+          </div>
+          <div class="form-group text-center">
+            <a href="javascript:void(0);" (click)="openLogin()" class="form-link">Already have an account? <span
+                class="primary">
+                Log in</span></a>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="userDetailStep">
+        <form class="custom-form " name="detailFrm" #detailFrm="ngForm"
+          (ngSubmit)="detailFrm.form.valid && submitDetails()" novalidate>
+          <div class="form-group">
+            <label>GST Number<span class="red">*</span></label>
+            <input type="text" name="txtGSTNo1" disabled (blur)="textChange();" [(ngModel)]="customerData.gst_no"
+              class="form-control" #txtGSTNo1="ngModel" placeholder="Enter GST No" required>
+            <div *ngIf="txtGSTNo1.invalid && (txtGSTNo1.dirty || txtGSTNo1.touched )" class="alert alert-error-message">
+              <ng-container *ngIf="txtGSTNo1.errors?.required">
+                GST No is required
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Legal Name<span class="red">*</span></label>
+            <input type="text" name="txtCompanyName" disabled (blur)="textChange();"
+              [(ngModel)]="customerData.company_name" class="form-control" #txtCompanyName="ngModel"
+              placeholder="Company Name" required>
+            <div *ngIf="txtCompanyName.invalid && (txtCompanyName.dirty || txtCompanyName.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtCompanyName.errors?.required">
+                Legal Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>State Jurisdiction<span class="red">*</span></label>
+            <input type="text" name="txtStateJurisdiction" disabled (blur)="textChange();"
+              [(ngModel)]="customerData.state_jurisdiction" class="form-control" #txtStateJurisdiction="ngModel"
+              placeholder="State Jurisdiction" required>
+            <div *ngIf="txtStateJurisdiction.invalid && (txtStateJurisdiction.dirty || txtStateJurisdiction.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtStateJurisdiction.errors?.required">State Jurisdiction is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nature of Business Activity<span class="red">*</span></label>
+            <input type="text" name="txtNatureBusinessActivity" disabled (blur)="textChange();"
+              [(ngModel)]="customerData.nature_business_activity" class="form-control"
+              #txtNatureBusinessActivity="ngModel" placeholder="Nature of Business Activity" required>
+            <div
+              *ngIf="txtNatureBusinessActivity.invalid && (txtNatureBusinessActivity.dirty || txtNatureBusinessActivity.touched)"
+              class="alert alert-error-message">
+              <div *ngIf="txtNatureBusinessActivity.errors?.required">Nature of Business Activity is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Trade Name<span class="red">*</span></label>
+            <input type="text" name="txtTradeName" disabled (blur)="textChange();" [(ngModel)]="customerData.trade_name"
+              class="form-control" #txtTradeName="ngModel" placeholder="Trade Name" required>
+            <div *ngIf="txtTradeName.invalid && (txtTradeName.dirty || txtTradeName.touched)"
+              class="alert alert-error-message">
+              <div *ngIf="txtTradeName.errors?.required">Trade Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Address<span class="red">*</span></label>
+            <textarea rows="2" name="txtAddress" disabled [(ngModel)]="customerData.address" class="form-control"
+              #txtAddress="ngModel" placeholder="Address"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Business Category<span class="red">*</span></label>
+            <select class="form-control" name="selectCategoryId" [(ngModel)]="customerData.category_id" required>
+              <ng-template ngFor let-item [ngForOf]="categories" let-i="index">
+                <option [value]="item.id">{{item.name}}
+                </option>
+              </ng-template>
+            </select>
+
+            <div
+              *ngIf="errorMessage && errorMessage == 'Please select business category' && customerData.category_id == '-1'"
+              class="alert alert-error-message">
+              {{errorMessage}}
+            </div>
+          </div>
+          <div class="form-group" *ngIf="customerData.category_id==0">
+            <label>Business Category Name<span class="red">*</span></label>
+            <input type="text" name="txtCategoryName" (blur)="textChange();" [(ngModel)]="customerData.category_name"
+              class="form-control" #txtCategoryName="ngModel" placeholder="Business Category Name" required>
+            <div *ngIf="txtCategoryName.invalid && (txtCategoryName.dirty || txtCategoryName.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtCategoryName.errors?.required">
+                Category is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address<span class="red">*</span></label>
+            <input type="text" name="txtEmail" (blur)="textChange();" [(ngModel)]="customerData.email"
+              class="form-control" #txtEmail="ngModel" placeholder="Enter email" required email>
+            <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched )" class="alert alert-error-message">
+              <div *ngIf="txtEmail.errors?.required">
+                Email is required
+              </div>
+              <div *ngIf="txtEmail.errors?.email">
+                Enter a valid email address
+              </div>
+
+            </div>
+            <div *ngIf="errorMessage && errorMessage == 'Email already exist'" class="alert alert-error-message">
+              {{errorMessage}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mobile Number<span class="red">*</span></label>
+            <input type="text" name="txtMobile" maxlength="10" minlength="10" (blur)="textChange();"
+              [(ngModel)]="customerData.mobile" class="form-control" inputmode="numeric" pattern="[0-9]*" decimal="true"
+              #txtMobile="ngModel" digitOnly placeholder="Enter mobile number" required>
+            <div *ngIf="txtMobile.invalid && (txtMobile.dirty || txtMobile.touched )" class="alert alert-error-message">
+              <div *ngIf="txtMobile.errors?.required">
+                Mobile number is required
+              </div>
+              <div *ngIf="txtMobile.errors?.minlength">
+                Mobile number is invalid
+              </div>
+            </div>
+            <div *ngIf="errorMessage && errorMessage == 'Mobile no already exist'" class="alert alert-error-message">
+              {{errorMessage}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Password<span class="red">*</span></label>
+            <input type="password" name="txtPassword" minlength="8" maxlength="50" (blur)="textChange();"
+              [(ngModel)]="customerData.password" class="form-control" #txtPassword="ngModel"
+              placeholder="Enter password" required>
+            <div *ngIf="txtPassword.invalid && (txtPassword.dirty || txtPassword.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtPassword.errors?.required">Password is required</div>
+              <div *ngIf="txtPassword.errors?.minlength">Password must be 8 characters long</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password<span class="red">*</span></label>
+            <input type="password" name="txtConfirmPassword" minlength="8" maxlength="50" (blur)="textChange();"
+              [(ngModel)]="customerData.confirm_password" class="form-control" #txtConfirmPassword="ngModel"
+              placeholder="Enter password" required>
+            <div *ngIf="txtConfirmPassword.invalid && (txtConfirmPassword.dirty || txtConfirmPassword.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtConfirmPassword.errors?.required">
+                Confirm Password is required
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="errorMessage && (errorMessage != 'Please select business category' && errorMessage != 'Mobile no already exist' && errorMessage != 'Email already exist')"
+            class="alert alert-error-message">{{errorMessage}}</div>
+          <div class="form-group">
+            <div class="custom-checkbox">
+              <input type="checkbox" id="testregisterTC" name="checkbox-group" [checked]="customerData.acceptTC"
+                (change)="customerData.acceptTC = !customerData.acceptTC" class="input-checkbox">
+              <label for="testregisterTC"><span>I have read and accept all the
+                  <a href="javascript:void(0)" target="_blank" [routerLink]="['/terms-and-Conditions']"
+                    class="blue-link">Terms & Conditions</a></span>
+              </label>
+            </div>
+            <div *ngIf="registerTCError != ''" class="alert alert-error-message">{{registerTCError}}</div>
+          </div>
+          <div class="form-group margin_top30">
+            <button type="submit" [disabled]='!detailFrm.form.valid' class="blue-btn full-width-btn">Next </button>
+          </div>
+          <div class="form-group text-center">
+            <a href="javascript:void(0);" (click)="gotoGSTStep()" class="form-link">Back</a>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="mobileVerifyStep">
+        <div class="modal-heading text-capitalize blue-text">Verify Mobile Number</div>
+        <form class="custom-form " name="verifyMobileFrm" #verifyMobileFrm="ngForm"
+          (ngSubmit)="verifyMobileFrm.form.valid && submitMobileVerifyStep()" novalidate>
+          <div class="form-group">
+            <label>One Time Password<span class="red">*</span></label>
+            <input type="text" name="txtOTP" maxlength="6" (blur)="textChange();" required
+              [(ngModel)]="customerData.mobile_vefify_otp" class="form-control" #txtOTP="ngModel"
+              placeholder="Enter OTP">
+            <div *ngIf="txtOTP.invalid && (txtOTP.dirty || txtOTP.touched )" class="alert alert-error-message">OTP is
+              required</div>
+            <div *ngIf="errorMessage" class="alert alert-error-message">{{errorMessage}}</div>
+          </div>
+          <div class="text-center margin_bottom40">
+            <a href="javascript:void(0)" (click)="resendotp()" class="fw-600">Resend</a>
+            <div *ngIf="successOTPMsg" class="alert alert-success-message">{{successOTPMsg}}</div>
+          </div>
+          <div class="form-group margin_top30">
+            <button type="submit" class="blue-btn full-width-btn" [disabled]='!verifyMobileFrm.form.valid'>Next</button>
+          </div>
+          <div class="form-group text-center">
+            <a href="javascript:void(0);" (click)="gotoUserDetailStep()" class="form-link pull-left">Back</a>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="panStep">
+        <div class="modal-heading text-capitalize blue-text">Pan details</div>
+        <form class="custom-form " name="panFrm" #panFrm="ngForm" (ngSubmit)="panFrm.form.valid && submitPanStep()"
+          novalidate>
+          <div class="form-group">
+            <label>Pan Card Number</label>
+            <input type="text" name="txtPANNo" maxlength="10" (blur)="textChange();" required
+              [(ngModel)]="customerData.pan_no" class="form-control" #txtPANNo="ngModel"
+              placeholder="Enter pan card number">
+            <div *ngIf="txtPANNo.invalid && (txtPANNo.dirty || txtPANNo.touched )" class="alert alert-error-message">
+              Pan card number is required.
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-error-message">
+              {{errorMessage}}
+            </div>
+          </div>
+
+          <div class="form-group margin_top30">
+            <button type="submit" class="blue-btn full-width-btn" [disabled]='!panFrm.form.valid'>Next</button>
+          </div>
+          <div class="form-group text-center">
+            <a href="javascript:void(0);" (click)="gotoVerifyOTPStep()" class="form-link pull-left">Back</a>
+            <a href="javascript:void(0);" (click)="gotoBankStep()" class="form-link padding_l5 pull-right">Skip</a>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="bankStep">
+        <div class="modal-heading text-capitalize blue-text">Bank Details</div>
+        <form class="custom-form " name="bankFrm" #bankFrm="ngForm" (ngSubmit)="bankFrm.form.valid && submitBank()"
+          novalidate>
+          <div class="">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="custom-checkbox margin_bottom10">
+                  <input type="checkbox" name="chkReferral" id="chkReferral" class="input-checkbox"
+                    [checked]="haveReferralCode" (change)="haveReferralCode = !haveReferralCode"
+                    style="z-index: 9999999">
+                  <label for="chkReferral" style="z-index: 99999"><span>Referral Code</span></label>
+                </div>
+                <div class="form-group no-margin-b" *ngIf="haveReferralCode">
+                  <input type="text" name="txtReferralCode" maxlength="50" (blur)="textChange();"
+                    (change)="applyReferralCode()" [(ngModel)]="customerData.referral_code" class="form-control"
+                    #txtReferralCode="ngModel" placeholder="Enter referral code" required>
+                  <div *ngIf="txtReferralCode.invalid && (txtReferralCode.dirty || txtReferralCode.touched )"
+                    class="alert alert-error-message">
+                    <div *ngIf="txtReferralCode.errors?.required">Referral code is required.</div>
+                  </div>
+                </div>
+                <div *ngIf="errorMessage_Referral" class="alert alert-error-message">
+                  {{errorMessage_Referral}}
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <hr class="custom-hr">
+          <div class="modal-subheading">Fill Bank Details</div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>IFSC Code<span class="red">*</span></label>
+                <input type="text" name="txtIFSCCode" maxlength="50" (blur)="textChange();" (change)="getBankByIFSC();"
+                  [(ngModel)]="bankDetails.ifsc_code" class="form-control text-uppercase" #txtIFSCCode="ngModel"
+                  placeholder="Enter IFSC code" required>
+                <div *ngIf="txtIFSCCode.invalid && (txtIFSCCode.dirty || txtIFSCCode.touched )"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtIFSCCode.errors?.required">IFSC Code is required</div>
+                </div>
+                <div *ngIf="errorMessage_IFSC_code != ''" class="alert alert-error-message">{{errorMessage_IFSC_code}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Bank Branch<span class="red">*</span></label>
+              <input type="text" name="txtBranchName" maxlength="50" (blur)="textChange();"
+                [(ngModel)]="bankDetails.branch_name" class="form-control" #txtBranchName="ngModel"
+                placeholder="Enter bank branch" required>
+              <div *ngIf="txtBranchName.invalid && (txtBranchName.dirty || txtBranchName.touched )"
+                class="alert alert-error-message">
+                <div *ngIf="txtBranchName.errors?.required">
+                  Branch Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Bank Name<span class="red">*</span></label>
+            <input type="text" name="txtBankName" maxlength="50" (blur)="textChange();"
+              [(ngModel)]="bankDetails.bank_name" class="form-control" #txtBankName="ngModel" placeholder="Bank Name"
+              required>
+            <div *ngIf="txtBankName.invalid && (txtBankName.dirty || txtBankName.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtBankName.errors?.required">Bank Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Account Holder Name<span class="red">*</span></label>
+            <input type="text" name="txtAccountName" maxlength="50" (blur)="textChange();"
+              [(ngModel)]="bankDetails.account_name" class="form-control" #txtAccountName="ngModel"
+              placeholder="Enter account holder name" pattern="[a-zA-Z ]*" required>
+            <div *ngIf="txtAccountName.invalid && (txtAccountName.dirty || txtAccountName.touched)"
+              class="alert alert-error-message">
+              <div *ngIf="txtAccountName.errors?.required">Account Name is required</div>
+              <div *ngIf="txtAccountName.errors?.pattern">Please enter only letters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Account Number<span class="red">*</span></label>
+            <input type="password" onCopy="return false" onDrag="return false" onDrop="return false"
+              onPaste="return false" name="txtAccountNo" maxlength="20" (blur)="textChange();"
+              [(ngModel)]="bankDetails.account_no" id="txtIDAccountNo" class="form-control" #txtAccountNo="ngModel"
+              digitOnly placeholder="Enter account number" required inputmode="numeric" pattern="[0-9]*" decimal="true">
+            <div *ngIf="txtAccountNo.invalid && (txtAccountNo.dirty || txtAccountNo.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtAccountNo.errors?.required">
+                Account Number is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirm Account Number<span class="red">*</span></label>
+            <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+              name="txtConfirmAccountNo" maxlength="20" (blur)="textChange();"
+              [(ngModel)]="bankDetails.confirm_account_no" id="txtConfIDAccountNo" class="form-control"
+              #txtConfirmAccountNo="ngModel" digitOnly placeholder="Enter confirm account number" required
+              inputmode="numeric" pattern="[0-9]*" decimal="true">
+            <div *ngIf="txtConfirmAccountNo.invalid && (txtConfirmAccountNo.dirty || txtConfirmAccountNo.touched )"
+              class="alert alert-error-message">
+              <div *ngIf="txtConfirmAccountNo.errors?.required">
+                Confirm Account Number is required
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-error-message">
+            {{errorMessage}}
+          </div>
+
+          <div class="form-group margin_top30" *ngIf="!haveReferralCode">
+            <button type="submit" [disabled]="!bankFrm.form.valid" class="blue-btn full-width-btn">Next </button>
+          </div>
+          <div class="form-group margin_top30" *ngIf="haveReferralCode">
+            <button type="submit" [disabled]="!bankFrm.form.valid || isInvalidRefferalCode == true"
+              class="blue-btn full-width-btn">Next </button>
+          </div>
+          <div class="form-group text-center">
+            <a href="javascript:void(0);" (click)="gotoPANStep()" class="form-link">Back</a>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="paymentStep">
+        <div class="payment-right">
+          <div class="modal-heading text-left blue-text">Payment</div>
+          <div class="display-flex align-center">
+            <div class="label">Registration Fees</div>
+            <div class="value ml-auto">Rs. {{paymentPost.amount}}</div>
+          </div>
+          <!-- <div class="display-flex align-center">
+            <div class="label">GST ({{paymentPost.gst_per}}%)</div>
+            <div class="value ml-auto">Rs. {{paymentPost.gst_amount}}</div>
+          </div> -->
+          <div class="form-block">
+            <form class="custom-form">
+              <div class="form-group no-margin-b ">
+                <label>Promo Code</label>
+                <form class="custom-form" name="promoCodeFrm" #promoCodeFrm="ngForm"
+                  (ngSubmit)="promoCodeFrm.form.valid && applyPromo()" novalidate>
+                  <div class="row padding_b10" *ngIf="!paymentPost.promo_applied">
+                    <div class="col-md-8 padding_r5">
+                      <input type="text" name="txtPromoCode" maxlength="50" (blur)="textChange();"
+                        [(ngModel)]="paymentPost.promo_code" class="form-control" #txtPromoCode="ngModel"
+                        placeholder="Enter promo code" required>
+                    </div>
+                    <div class="col-md-4 padding_l5">
+                      <button type="submit" [disabled]='!promoCodeFrm.form.valid' class="blue-btn">Apply Code</button>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="paymentPost.promo_applied">
+                    <div class="col-md-8 padding_r5">
+                      <div class="alert alert-success" style="padding: 6px !important;" role="alert">
+                        {{paymentPost.promo_code}}
+                      </div>
+                    </div>
+                    <div class="col-md-4 padding_l5">
+                      <button (click)="removePromo()" class="blue-btn">Remove</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-10 ">
+                      <div *ngIf="errorMessage" class="alert alert-error-message">
+                        {{errorMessage}}
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="display-flex align-center payment-modal-footer no-margin-b ">
+                <div class="label blue-text">Total Amount</div>
+                <div class="value ml-auto blue-text">Rs. {{paymentPost.total_amount}}</div>
+              </div>
+
+              <ng-container *ngIf="paymentPost.discount_amount>0">
+                <div class="display-flex align-center payment-modal-footer no-margin-b ">
+                  <div class="clear"></div>
+                  <div class="label blue-text">Discount</div>
+                  <div class="value ml-auto blue-text">Rs. {{paymentPost.discount_amount}}</div>
+                </div>
+              </ng-container>
+              <div class="display-flex align-center payment-modal-footer" *ngIf="gstStateCode != '08'">
+                <div class="label blue-text">IGST ({{paymentPost.gst_per}}%)</div>
+                <div class="value ml-auto blue-text">Rs. {{paymentPost.gst_amount}}</div>
+              </div>
+              <div class="display-flex align-center payment-modal-footer" *ngIf="gstStateCode == '08'">
+                <div class="label blue-text">CGST ({{settings.registration_cgst}}%)</div>
+                <div class="value ml-auto blue-text">Rs. {{paymentPost.cgst_amount}}</div>
+              </div>
+              <div class="display-flex align-center payment-modal-footer" *ngIf="gstStateCode == '08'">
+                <div class="label blue-text">SGST ({{settings.registration_sgst}}%)</div>
+                <div class="value ml-auto blue-text">Rs. {{paymentPost.sgst_amount}}</div>
+              </div>
+              <div class="display-flex align-center payment-modal-footer">
+                <div class="label blue-text">Pay Amount</div>
+                <div class="value ml-auto blue-text">Rs. {{paymentPost.paid_amount}}</div>
+              </div>
+              <ul class="info-list">
+                <li><strong>It includes</strong></li>
+                <li>*Life Time Membership</li>
+                <li>*Add Defaulters</li>
+                <li>*Settle Payment For Verified Defaulters</li>
+              </ul>
+              <div class="form-group ">
+                <button class="blue-btn full-width-btn" (click)="proceedToPay()">Proceed to Pay</button>
+              </div>
+              <div class="form-group text-center" style="margin-top: 20px;">
+                <a href="javascript:void(0);" (click)="gotoBankStep()" class="form-link">Back</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <div>
+        <form #paytm_form method="post" action="{{paytmPostData.pay_url}}" name="paytm_form">
+          <table>
+            <tbody>
+              <input type="hidden" name="MID" [ngModel]="paytmPostData.MID">
+              <input type="hidden" name="WEBSITE" [ngModel]="paytmPostData.WEBSITE">
+              <input type="hidden" name="ORDER_ID" [ngModel]="paytmPostData.ORDER_ID">
+              <input type="hidden" name="CUST_ID" [ngModel]="paytmPostData.CUST_ID">
+              <input type="hidden" name="MOBILE_NO" [ngModel]="paytmPostData.MOBILE_NO">
+              <input type="hidden" name="EMAIL" [ngModel]="paytmPostData.EMAIL">
+              <input type="hidden" name="INDUSTRY_TYPE_ID" [ngModel]="paytmPostData.INDUSTRY_TYPE_ID">
+              <input type="hidden" name="CHANNEL_ID" [ngModel]="paytmPostData.CHANNEL_ID">
+              <input type="hidden" name="TXN_AMOUNT" [ngModel]="paytmPostData.TXN_AMOUNT">
+              <input type="hidden" name="CALLBACK_URL" [ngModel]="paytmPostData.CALLBACK_URL">
+              <input type="hidden" name="CHECKSUMHASH" [ngModel]="paytmPostData.CHECKSUMHASH">
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

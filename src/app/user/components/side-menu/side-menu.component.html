@@ -1,0 +1,73 @@
+<div class="sidebar-header">
+  <div class="mobile-inner-header-icon mobile-inner-header-icon-out jq_sidebar_menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<div class="jq_overlay_sidebar"></div>
+<div class="sidebar">
+  <div class="sidebar-box">
+    <div class="user-info">
+      <div class="user-img">
+        <img src="{{loginUser.avatar}}" onError="this.src='assets/img/user.png';" class="img-responsive center-block"
+          alt="Logo">
+      </div>
+      <div class="user-name">{{loginUser.trade_name}}</div>
+      <div class="user-id">{{loginUser.customer_no}}</div>
+      <!-- <div class="cibil-score">CQE Score: {{loginUser.credit_score}}</div> -->
+      <!-- <div style="margin-top:-20px">
+        <div id="chartdiv" style="width: 100%; height: 100px"></div>
+      </div> -->
+    </div>
+
+    <div class="left-navigation">
+      <ul class="list">
+
+        <li [ngClass]=[dashboard]>
+          <a href="javascript:void(0)" class="jq_s_menu" (click)="routerService.RedirectDashboard()"><span
+              class="lm-icon dash-icon"></span>Dashboard</a></li>
+        <li [ngClass]=[invoice]>
+          <a href="javascript:void(0)" class="jq_s_menu" (click)="routerService.RedirectInvoice()"><span
+              class="lm-icon invoice-icon"></span>My Invoices</a></li>
+        <li class="dropdown" [ngClass]=[defaulterMain]>
+          <a href="javascript:void(0);" class="jq_drop_m"><span class="lm-icon defaulter-icon"></span> Defaulter <i
+              class="down-icon"></i></a>
+          <ul class="left-sub-menu">
+            <li [ngClass]=[uploadDefaulter]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectUploadDefaulter()">Add Defaulter</a></li>
+            <li [ngClass]=[defaulter]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectDefaulter()">View
+                Defaulter</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" [ngClass]=[settleMain]>
+          <a href="javascript:void(0);" class="jq_drop_m"><span class="lm-icon spayment-icon"></span> Settlements <i
+              class="down-icon"></i></a>
+          <ul class="left-sub-menu">
+            <li [ngClass]=[settlePayment]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectPendingSettlements()">Settle Payment</a>
+            </li>
+            <li [ngClass]=[settlements]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectSettlements()">Defaulter Settlement History</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" [ngClass]=[cibilMain]>
+          <a href="javascript:void(0);" class="jq_drop_m"><span class="lm-icon cibil-icon"></span> CIR <i
+              class="down-icon"></i></a>
+          <ul class="left-sub-menu">
+            <li [ngClass]=[requestCibilReport]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectRequestCQEReport()">Request CIR</a>
+            </li>
+            <li [ngClass]=[cibilReport]><a href="javascript:void(0)" class="jq_s_menu"
+                (click)="routerService.RedirectCQEReport()">View
+                CIR</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="logout-sec">
+      <a href="javascript:void(0)" (click)="logout()">Logout</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>CreditQ</title>
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" type="text/css" href="assets/css/sidenavi-right.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/icoMoon.css">
+    <!--  <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <!-- <script defer type="text/javascript" src="assets/js/bootstrap.min.js"></script> -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+    <app-root></app-root>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/387a27b8f4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="assets/js/SideNavi.js"></script>
+    <!--  <script src="assets/js/owl.carousel.min.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".jq_main_menu").click(function () {
+                $(this).toggleClass("mobile-inner-header-icon-click mobile-inner-header-icon-out");
+                $(".main-menu").toggleClass("active");
+                $(".jq_overlay").toggleClass("active");
+                $("body").toggleClass("body-overflow");
+            });
+            $(".jq_overlay").click(function () {
+                $(".jq_main_menu").toggleClass("mobile-inner-header-icon-click mobile-inner-header-icon-out");
+                $(".main-menu").removeClass("active");
+                $(".jq_overlay").removeClass("active");
+                $("body").removeClass("body-overflow");
+            });
+            $(".jq_m_menu").click(function () {
+                $(".jq_main_menu").toggleClass("mobile-inner-header-icon-click mobile-inner-header-icon-out");
+                $(".main-menu").removeClass("active");
+                $(".jq_overlay").removeClass("active");
+                $("body").removeClass("body-overflow");
+            });
+        });
+    </script>
+</body>
+
+</html>

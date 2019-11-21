@@ -1,0 +1,241 @@
+<app-support-form></app-support-form>
+<section class="rows about-banner-wrap contact-banner-wrap">
+  <div class="about-banner">
+    <img src="assets/img/contat-banner.jpg" />
+  </div>
+</section>
+<section class="rows contact-form-wrap">
+  <div class="inner-heading">Contact us</div>
+  <!-- <div class="container">
+    <div class="contact-form-sec">
+      <div class="row">
+        <div class="col-md-6 cf-left">
+          <div class="pos-rel">
+            <form class="custom-form contact-form" name="contactFrm" #contactFrm="ngForm"
+              (ngSubmit)="contactFrm.form.valid && save(contactFrm)" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" maxlength="100" name="txtName" id="txtName" class="form-control text-capitalize"
+                      (blur)="removeError()" placeholder="First name" #txtName="ngModel"
+                      [(ngModel)]="postData.first_name" (keypress)=commonService._keyPressString($event)
+                      pattern="[a-zA-Z ]*" required>
+                    <div *ngIf="txtName.invalid && (txtName.dirty || txtName.touched)"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtName.errors?.required">First Name is required</div>
+                      <div *ngIf="txtName.errors?.pattern">Please enter only letters</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" maxlength="100" name="txtLastName" id="txtLastName"
+                      class="form-control text-capitalize" (blur)="removeError()" placeholder="Last name"
+                      #txtLastName="ngModel" [(ngModel)]="postData.last_name"
+                      (keypress)=commonService._keyPressString($event) pattern="[a-zA-Z ]*" required>
+                    <div *ngIf="txtLastName.invalid && (txtLastName.dirty || txtLastName.touched)"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtLastName.errors?.required">Last Name is required</div>
+                      <div *ngIf="txtName.errors?.pattern">Please enter only letters</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" maxlength="10" name="txtContact" id="txtContact" class="form-control"
+                  placeholder="Contact number" #txtContact="ngModel" [(ngModel)]="postData.mobile" pattern="^[0-9]{10}$"
+                  required (keypress)=_keyPress($event) (blur)="removeError()">
+                <div *ngIf="txtContact.invalid && (txtContact.dirty || txtContact.touched)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtContact.errors?.required">Mobile is required</div>
+                  <div *ngIf="txtContact.errors?.pattern">Mobile number must be 10 digit number</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="100" name="txtEmail" id="txtEmail" class="form-control"
+                  (blur)="removeError()" placeholder="Email address" #txtEmail="ngModel" [(ngModel)]="postData.email"
+                  required email>
+                <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtEmail.errors?.required">Email is required</div>
+                  <div *ngIf="txtEmail.errors?.email">Enter a valid email address</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="100" name="txtCompanyName" id="txtCompanyName" class="form-control"
+                  (blur)="removeError()" placeholder="Company name" #txtCompanyName="ngModel"
+                  [(ngModel)]="postData.company_name" required>
+                <div *ngIf="txtCompanyName.invalid && (txtCompanyName.dirty || txtCompanyName.touched)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtCompanyName.errors?.required">Company Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="15" name="txtGSTNo" id="txtGSTNo" class="form-control text-uppercase"
+                  (blur)="removeError()" placeholder="GST number" #txtGSTNo="ngModel" [(ngModel)]="postData.gst_no"
+                  required>
+                <div *ngIf="txtGSTNo.invalid && (txtGSTNo.dirty || txtGSTNo.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtGSTNo.errors?.required">
+                    GST Number is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" maxlength="500" name="txtIssue" id="txtIssue"
+                  placeholder="Enter your message" #txtIssue="ngModel" [(ngModel)]="postData.issues" required
+                  (blur)="removeError()"></textarea>
+                <div *ngIf="txtIssue.invalid && (txtIssue.dirty || txtIssue.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtIssue.errors?.required">Message is required</div>
+                </div>
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-error-message">{{errorMessage}}</div>
+              <button class="blue-btn" [disabled]='!contactFrm.form.valid'>Send</button>
+              <button class="blue-btn ml-10" (click)="contactFrm.reset()">Reset</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 cf-right">
+          <div class="cf-heading">Write to us or come and visit us</div>
+          <div class="cf-address">Business Alert Infotech Pvt. Ltd. <br />3/31 Chitrakoot Vaishali Nagar, <br />Jaipur,
+            Rajasthan, India</div>
+          <div class="cf-number">
+            <a href="mailto:info@creditq.in">info@creditq.in</a><br />
+            <a href="tel:+919987688888">+91 9987688888</a><br />
+            <a href="tel:+9177638917300">+91 77638917300</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="container">
+    <div class="contact-form-sec">
+      <div class="contact-form">
+        <div class="contact-info cf-right">
+          <div class="cf-heading">Write to us</div>
+          <!-- <div class="cf-address">
+            1962  Pearl Street <br/>SAINT PETERSBURG FL <br/>Florida 33710
+          </div> -->
+          <div class="cf-img">
+            <img src="assets/img/customer-care-img.jpg" />
+          </div>
+          <div class="cf-number">
+            <a href="mailto:support@creditq.in"><i class="fa fa-envelope" aria-hidden="true"></i>
+              support@creditq.in</a><br />
+            <a href="tel:+918881889900"><i class="fa fa-phone" aria-hidden="true" title="phone"></i> +91 888-188-9900</a><br />
+          </div>
+          <ul class="social-menu mt-20">
+            <li class="fb-icon"><a href="https://www.facebook.com/Creditq.in/" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a></li>
+            <li class="yt-icon"><a href="https://www.youtube.com/channel/UCFfeQmdNjEPvCGqglgtzfVQ?view_as=subscriber"><i
+                  class="fab fa-youtube" target="_blank"></i></a></li>
+            <li class="lnk-icon"><a href="https://www.linkedin.com/in/mukta-mittal-365904196/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a></li>
+            <li class="ins-icon"><a href="https://www.instagram.com/creditq.in/?igshid=1ofq1qtit4ebk" target="_blank"><i
+                  class="fab fa-instagram"></i></a></li>
+            <li class="tw-icon"><a href="https://twitter.com/Creditq6" target="_blank"><i
+                  class="fab fa-twitter"></i></a></li>
+            <li class="pin-icon"><a href="https://in.pinterest.com/icreditq/" target="_blank"><i
+                  class="fab fa-pinterest-p"></i></a></li>
+          </ul>
+        </div>
+        <div class="cf-left">
+          <div class="pos-rel">
+            <form class="custom-form " name="contactFrm" #contactFrm="ngForm"
+              (ngSubmit)="contactFrm.form.valid && save(contactFrm)" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" maxlength="100" name="txtName" id="txtName" class="form-control text-capitalize"
+                      (blur)="removeError()" placeholder="First name" #txtName="ngModel"
+                      [(ngModel)]="postData.first_name" (keypress)=commonService._keyPressString($event)
+                      pattern="[a-zA-Z ]*" required>
+                    <div *ngIf="txtName.invalid && (txtName.dirty || txtName.touched)"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtName.errors?.required">First Name is required</div>
+                      <div *ngIf="txtName.errors?.pattern">Please enter only letters</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" maxlength="100" name="txtLastName" id="txtLastName"
+                      class="form-control text-capitalize" (blur)="removeError()" placeholder="Last name"
+                      #txtLastName="ngModel" [(ngModel)]="postData.last_name"
+                      (keypress)=commonService._keyPressString($event) pattern="[a-zA-Z ]*" required>
+                    <div *ngIf="txtLastName.invalid && (txtLastName.dirty || txtLastName.touched)"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtLastName.errors?.required">Last Name is required</div>
+                      <div *ngIf="txtName.errors?.pattern">Please enter only letters</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" maxlength="10" name="txtContact" id="txtContact" class="form-control"
+                  placeholder="Contact number" #txtContact="ngModel" [(ngModel)]="postData.mobile" pattern="^[0-9]{10}$"
+                  required (keypress)=_keyPress($event) (blur)="removeError()">
+                <div *ngIf="txtContact.invalid && (txtContact.dirty || txtContact.touched)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtContact.errors?.required">Mobile is required</div>
+                  <div *ngIf="txtContact.errors?.pattern">Mobile number must be 10 digit number</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="100" name="txtEmail" id="txtEmail" class="form-control"
+                  (blur)="removeError()" placeholder="Email address" #txtEmail="ngModel" [(ngModel)]="postData.email"
+                  required email>
+                <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtEmail.errors?.required">Email is required</div>
+                  <div *ngIf="txtEmail.errors?.email">Enter a valid email address</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="100" name="txtCompanyName" id="txtCompanyName" class="form-control"
+                  (blur)="removeError()" placeholder="Company name" #txtCompanyName="ngModel"
+                  [(ngModel)]="postData.company_name" required>
+                <div *ngIf="txtCompanyName.invalid && (txtCompanyName.dirty || txtCompanyName.touched)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtCompanyName.errors?.required">Company Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" maxlength="15" name="txtGSTNo" id="txtGSTNo" class="form-control"
+                  (blur)="removeError()" placeholder="GST number" #txtGSTNo="ngModel" [(ngModel)]="postData.gst_no"
+                  required>
+                <div *ngIf="txtGSTNo.invalid && (txtGSTNo.dirty || txtGSTNo.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtGSTNo.errors?.required">
+                    GST Number is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" maxlength="500" name="txtIssue" id="txtIssue"
+                  placeholder="Enter your message" #txtIssue="ngModel" [(ngModel)]="postData.issues" required
+                  (blur)="removeError()"></textarea>
+                <div *ngIf="txtIssue.invalid && (txtIssue.dirty || txtIssue.touched)" class="alert alert-error-message">
+                  <div *ngIf="txtIssue.errors?.required">Message is required</div>
+                </div>
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-error-message">{{errorMessage}}</div>
+              <button class="blue-btn" [disabled]='!contactFrm.form.valid'>Send</button>
+              <button class="blue-btn ml-10" (click)="contactFrm.reset()">Reset</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="address-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.201632146721!2d75.7371589148876!3d26.897095267237756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db4968ecb506f%3A0x74c8c7fe5ea1fa2f!2s3%2C%208%2F31%2C%20Chitrakoot%20Marg%2C%20Sector%208%2C%20Vaishali%20Nagar%2C%20Jaipur%2C%20Rajasthan%20302021!5e0!3m2!1sen!2sin!4v1569238177911!5m2!1sen!2sin"
+      width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+  </div> -->
+</section>
+<section class="rows contact-map-wrap">
+  <div class="address-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.201632146721!2d75.7371589148876!3d26.897095267237756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db4968ecb506f%3A0x74c8c7fe5ea1fa2f!2s3%2C%208%2F31%2C%20Chitrakoot%20Marg%2C%20Sector%208%2C%20Vaishali%20Nagar%2C%20Jaipur%2C%20Rajasthan%20302021!5e0!3m2!1sen!2sin!4v1569238177911!5m2!1sen!2sin"
+      width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<!--header component -->
+<ng-container *ngIf="!isAppHome">
+    <app-header></app-header>
+</ng-container>
+
+<ng-http-loader [backdrop]="true" [backgroundColor]="'#2387ff'" [debounceDelay]="100" [extraDuration]="300"
+    [minDuration]="300" [opacity]=".6" spinner="sk-wave">
+
+</ng-http-loader>
+<!--Router component -->
+<router-outlet></router-outlet>
+<ng-container *ngIf="!isAppHome">
+    <!--Footer component -->
+    <app-footer></app-footer>
+</ng-container>

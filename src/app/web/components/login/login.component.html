@@ -1,0 +1,61 @@
+<app-support-form></app-support-form>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopup()">
+  <span aria-hidden="true">×</span>
+</button>
+<div class="display-flex">
+  <div class="lm-left">
+    <div class="login-logo">
+      <img width="189" height="103" src="assets/img/login-screen-logo.png" alt="CreditQ" />
+    </div>
+  </div>
+  <div class="lm-right">
+    <ng-container>
+      <div class="form-heading ">LOGIN</div>
+      <!-- <div class="modal-subheading margin_bottom20">Please login to your account</div> -->
+      <div class="form-scroll">
+        <form class="custom-form" name="frmLogin" #frmLogin="ngForm" (ngSubmit)="frmLogin.form.valid && authenticate()"
+          novalidate>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" placeholder="Email" id="txtEmail" name="txtEmail"
+              #txtEmail="ngModel" [(ngModel)]="loginDetails.email" required email />
+            <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-error-message">
+              <div *ngIf="txtEmail.errors?.required">
+                Email is required
+              </div>
+              <div *ngIf="txtEmail.errors?.email">
+                Enter a valid email address
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" id="txtPassword" name="txtPassword" #txtPassword="ngModel"
+              placeholder="Password" [(ngModel)]="loginDetails.password" required />
+
+            <div *ngIf="txtPassword.invalid && (txtPassword.dirty || txtPassword.touched)"
+              class="alert alert-error-message">
+              <div *ngIf="txtPassword.errors?.required">
+                Password is required
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-error-message">
+            <div *ngIf="errorMessage && frmLogin.valid">
+              {{ errorMessage }}
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" [disabled]='!frmLogin.form.valid' class="blue-btn full-width-btn">Login</button>
+          </div>
+          <div class="form-group ">
+            <a href="javascript:void(0);" (click)="openForgotPassword()" class="form-link pull-left">Forgot
+              Password?</a>
+            <a href="javascript:void(0);" (click)="openRegistration()" class="form-link pull-right">Don't have an
+              account? Sign up</a>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

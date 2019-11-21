@@ -1,0 +1,34 @@
+<div class="main-menu">
+  <ul>
+    <li [ngClass]=[home]>
+      <a (click)="route.RedirectHome()" class="jq_m_menu" href="javascript:void(0)">Home</a>
+    </li>
+    <li [ngClass]=[about]>
+      <a (click)="route.RedirectAbout()" class="jq_m_menu" href="javascript:void(0)">About us</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)">Services</a>
+      <ul class="sub-menu">
+        <li><a class="jq_m_menu" href="javascript:void(0)" (click)="route.RedirectMembershipPlan()">Membership </a></li>
+        <li><a class="jq_m_menu" href="javascript:void(0)" (click)="route.RedirectAboutDefualter()">Add Defaulter</a>
+        </li>
+        <li><a class="jq_m_menu" href="javascript:void(0)" (click)="route.RedirectAboutSettlePayment()">Settle
+            Payment</a></li>
+        <li><a class="jq_m_menu" href="javascript:void(0)" (click)="route.RedirectAboutCreditReport()">
+            Credit Information Report</a></li>
+      </ul>
+    </li>
+    <li [ngClass]=[solution]>
+      <a (click)="route.RedirectSolution()" class="jq_m_menu" href="javascript:void(0)">Solutions</a>
+    </li>
+    <li [ngClass]=[contact]>
+      <a (click)="route.RedirectContact()" class="jq_m_menu" href="javascript:void(0)">Contact us</a>
+    </li>
+    <li [ngClass]=[help]>
+      <a (click)="route.RedirectHelp()" class="jq_m_menu" href="javascript:void(0)">Help</a>
+    </li>
+    <!-- <li>
+      <a href="tel:9782609252">Call Me</a>
+    </li> -->
+  </ul>
+</div>

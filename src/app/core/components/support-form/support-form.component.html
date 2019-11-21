@@ -1,0 +1,47 @@
+<div id="sideNavi" class="online-support">
+  <!-- sidenavi menu //-->
+  <div class="side-navi-item-default"></div>
+  <div id="sideNaviButton" class="side-navi-item item1"><div>Support</div></div>
+  <!-- sidenavi data //-->
+  <div class="side-navi-data">
+    <div class="side-navi-tab">
+      <div class="online-support-box">
+        <div class="feedback-form-section">
+          <form class="feedback-form" name="supportFrm" #supportFrm="ngForm" (ngSubmit)="supportFrm.form.valid && save(supportFrm)" novalidate>
+            <div class="form-group">
+              <label>Question</label>
+              <select  class="form-control" name="selectQuestionId" [(ngModel)]="postData.question_id">
+                  <option [value]="item.id" *ngFor="let item of questionData">{{item.support_question}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" maxlength="100" name="txtName" id="txtName" class="form-control" (blur)="removeError()" placeholder="Full Name" #txtName="ngModel" [(ngModel)]="postData.full_name" pattern="[a-zA-Z ]*" required>
+              <div *ngIf="txtName.invalid && (txtName.dirty || txtName.touched)" class="alert alert-error-message">
+                <div *ngIf="txtName.errors?.required">Full name is required</div>
+                <div *ngIf="txtName.errors?.pattern">Please enter only letters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" maxlength="100" name="txtEmail" id="txtEmail" class="form-control" (blur)="removeError()" placeholder="Email address" #txtEmail="ngModel" [(ngModel)]="postData.email" required email>
+              <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-error-message">
+                <div *ngIf="txtEmail.errors?.required">Email is required</div>
+                <div *ngIf="txtEmail.errors?.email">Enter a valid email address</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone no.</label>
+              <input type="text" maxlength="10" name="txtMobile" id="txtMobile" class="form-control" placeholder="Phone number" #txtMobile="ngModel" [(ngModel)]="postData.mobile" (keypress)=_keyPress($event) (blur)="removeError()" required>
+              <div *ngIf="txtMobile.invalid && (txtMobile.dirty || txtMobile.touched)" class="alert alert-error-message">
+                <div *ngIf="txtMobile.errors?.required">Phone number is required</div>
+              </div>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-error-message">{{errorMessage}}</div>
+            <button class="blue-btn" [disabled]='!supportFrm.form.valid'>Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

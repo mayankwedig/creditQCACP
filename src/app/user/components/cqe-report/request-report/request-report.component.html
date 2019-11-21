@@ -1,0 +1,120 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Request CIR</div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-7">
+                <div class="pos-rel">
+                  <input type="text" name="search_gst" [(ngModel)]="postData.gst_no" class="form-control"
+                    placeholder="Search by GST number">
+                  <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-5 no-padding-l">
+                <button class="blue-btn" (click)="search()">Search</button>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="customerData.gst_no!=null && customerData.gst_no !=''">
+            <div class="modal-heading text-left blue-text">Requesting Credit Information for</div>
+            <div class=" row">
+              <div class="col-lg-5 col-md-7">
+                <div class="form-group">
+                  <label>GST Number</label>
+                  <input type="text" disabled name="gst_no" [(ngModel)]="customerData.gst_no" class="form-control"
+                    placeholder="GST No">
+                </div>
+                <div class="form-group ">
+                  <label>Legal Name</label>
+                  <input type="text" disabled name="company_name" [(ngModel)]="customerData.company_name"
+                    class="form-control" placeholder="Company Name" value="">
+                </div>
+                <div class="form-group">
+                  <label>State Jurisdiction</label>
+                  <input type="text" disabled name="txtStateJurisdiction" [(ngModel)]="customerData.state_jurisdiction"
+                    class="form-control" placeholder="" required>
+                </div>
+                <div class="form-group">
+                  <label>Nature of Business Activity</label>
+                  <input type="text" disabled name="txtNatureBusinessActivity"
+                    [(ngModel)]="customerData.nature_business_activity" class="form-control" placeholder="" required>
+                </div>
+                <div class="form-group">
+                  <label>Trade Name</label>
+                  <input type="text" disabled name="txtTradeName" [(ngModel)]="customerData.trade_name"
+                    class="form-control" placeholder="" required>
+                </div>
+                <div class="form-group">
+                  <label>Address</label>
+                  <textarea rows="2" name="txtAddress" disabled [(ngModel)]="customerData.address" class="form-control"
+                    placeholder="Address"></textarea>
+                </div>
+                <ng-container *ngIf="customerData.is_defaulter">
+                  <div class="modal-heading text-left blue-text">Payment Information</div>
+                  <div class="display-flex align-center margin_bottom20">
+                    <div class="label">Report Fees</div>
+                    <div class="value ml-auto">Rs. {{paymentPost.amount}}</div>
+                  </div>
+                  <div class="display-flex align-center margin_bottom20" *ngIf="gstStateCode != '08'">
+                    <div class="label">IGST ({{paymentPost.gst_per}}%)</div>
+                    <div class="value ml-auto">Rs. {{paymentPost.gst_amount}}</div>
+                  </div>
+                  <div class="display-flex align-center margin_bottom20" *ngIf="gstStateCode == '08'">
+                    <div class="label">CGST ({{settings.report_cgst}}%)</div>
+                    <div class="value ml-auto">Rs. {{paymentPost.cgst_amount}}</div>
+                  </div>
+                  <div class="display-flex align-center margin_bottom20" *ngIf="gstStateCode == '08'">
+                    <div class="label">SGST ({{settings.report_sgst}}%)</div>
+                    <div class="value ml-auto">Rs. {{paymentPost.sgst_amount}}</div>
+                  </div>
+                  <div class="display-flex align-center margin_bottom20">
+                    <div class="label">Pay Amount</div>
+                    <div class="value ml-auto">Rs. {{paymentPost.paid_amount}}</div>
+                  </div>
+
+                </ng-container>
+
+              </div>
+            </div>
+            <div class="pad" *ngIf="customerData.is_defaulter">
+              <a href="javascript:void(0)" (click)="redirectToPayment()" class="blue-btn defaulter-btn paynow-btn">Pay
+                Now</a>
+              <a href="javascript:void(0)" (click)="reset()" class="transparent-btn defaulter-btn paynow-btn">Reset</a>
+            </div>
+            <div class="alert-error-message" *ngIf="!customerData.is_defaulter">No data available for
+              "{{customerData.gst_no}}". Sorry for inconvenience</div>
+          </ng-container>
+          <ng-container
+            *ngIf="(customerData.gst_no==null || customerData.gst_no =='') && postData.gst_no!=null && postData.gst_no !='' ">
+            <div class="alert-error-message" *ngIf="!customerData.is_defaulter">
+              {{errorMessage}}
+            </div>
+          </ng-container>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+    <form #paytm_form method="post" action="{{paytmPostData.pay_url}}" name="paytm_form">
+      <table>
+        <tbody>
+          <input type="hidden" name="MID" [ngModel]="paytmPostData.MID">
+          <input type="hidden" name="WEBSITE" [ngModel]="paytmPostData.WEBSITE">
+          <input type="hidden" name="ORDER_ID" [ngModel]="paytmPostData.ORDER_ID">
+          <input type="hidden" name="CUST_ID" [ngModel]="paytmPostData.CUST_ID">
+          <input type="hidden" name="MOBILE_NO" [ngModel]="paytmPostData.MOBILE_NO">
+          <input type="hidden" name="EMAIL" [ngModel]="paytmPostData.EMAIL">
+          <input type="hidden" name="INDUSTRY_TYPE_ID" [ngModel]="paytmPostData.INDUSTRY_TYPE_ID">
+          <input type="hidden" name="CHANNEL_ID" [ngModel]="paytmPostData.CHANNEL_ID">
+          <input type="hidden" name="TXN_AMOUNT" [ngModel]="paytmPostData.TXN_AMOUNT">
+          <input type="hidden" name="CALLBACK_URL" [ngModel]="paytmPostData.CALLBACK_URL">
+          <input type="hidden" name="CHECKSUMHASH" [ngModel]="paytmPostData.CHECKSUMHASH">
+        </tbody>
+      </table>
+    </form>
+  </div>
+</section>

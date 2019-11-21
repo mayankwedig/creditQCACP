@@ -1,0 +1,109 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">View Defaulter</div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="pos-rel">
+                  <input type="text" [(ngModel)]="postData.gst_no" name="gst_no" class="form-control search-field"
+                    placeholder="Search by GST number / Trade Name">
+                  <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                </div>
+              </div>
+              <div class="col-md-6 no-padding-l">
+                <button class="blue-btn text-capitalize" *ngIf="!isSearch" (click)="searchList()">Search</button>
+                &nbsp; <button *ngIf="isSearch" class="transparent-btn defaulter-btn text-capitalize"
+                  (click)="resetSearch()" style="max-width: 136px;">Reset</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="defaulter-table-sec table-responsive">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th width="10.5%">GST Number</th>
+                <th width="10.5%">Unique Id/Trade Name</th>
+                <th width="10.5%">Due Amount</th>
+                <th width="10.5%">Due Date</th>
+                <th width="10.5%">Defaulter submitted date</th>
+                <th width="10.5%">Partial Settled Amount</th>
+                <th width="10.5%">Balance</th>
+                <th width="5%">Status</th>
+                <th width="10.5%">Admin Comment</th>
+                <th width="10.5%">Action / Settlement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-template ngFor let-item [ngForOf]="listData" let-i="index">
+                <tr>
+                  <td width="10.5%" data-title="GST Number">
+                    <a class="blue-text" href="javascript:void(0)" (click)="viewDetail(item.id)">{{item.gst_no}}</a>
+                  </td>
+                  <td width="10.5%" data-title="Company Name">{{item.customer_no}} <br />{{item.trade_name}}</td>
+                  <td width="10.5%" data-title="Due Amount"><i class="fas fa-rupee-sign"></i>{{item.payment_due_amount}}</td>
+                  <td width="10.5%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.payment_due_date)}}</td>
+                  <td width="10.5%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.created)}}</td>
+                  <td width="10.5%" data-title="Partial Settled Amount">
+                    <span *ngIf="item.settlement_amount != null"> <i class="fas fa-rupee-sign"></i>{{(item.settlement_amount)}}</span>
+                    <span *ngIf="item.settlement_amount == null">--</span>
+                  </td>
+                  <td width="10.5%" data-title="Balance" *ngIf="item.payment_due_amount-item.settlement_amount > 0"><i class="fas fa-rupee-sign"></i>{{(item.payment_due_amount-item.settlement_amount)}}</td>
+                  <td width="10.5%" data-title="Balance" *ngIf="!item.payment_due_amount-item.settlement_amount > 0">
+                    <i class="fas fa-rupee-sign"></i> 0.00
+                  </td>
+                  <td width="5%" data-title="Status" class="text-capitalize">{{item.status | removeUnderscore}}</td>
+                  <td width="10.5%" data-title="Admin Comment" class="text-capitalize">
+                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment != ''">{{item.admin_comment}}</ng-container>
+                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment == ''">{{item.admin_comment}}</ng-container>
+                    <ng-container *ngIf="item.status==statusEnum.Verified">--</ng-container>
+                  </td>
+                  <td width="10.5%" data-title="Settle Payment">
+                    <ng-container *ngIf="item.status==statusEnum.Verified && item.settlement_finish!='yes'">
+                      <div class="ct-dropdown">
+                        <span class="ct-btn">
+                          <a href="javascript:void(0)" (click)="loadJS($event)">Settle</a>
+                          <a href="javascript:void(0)" (click)="loadJS($event)" class="arrow jq_arrow"></a>
+                          <div class="ct-dropdown-menu">
+                            <div class="custom-radio">
+                              <input type="radio" id="test11" name="radio-group" checked>
+                              <label for="test11" (click)="settlement(item.id,settlementType.Full)">Full Payment</label>
+                            </div>
+                            <div class="custom-radio">
+                              <input type="radio" id="test12" name="radio-group">
+                              <label for="test12" (click)="settlement(item.id,settlementType.Partial)">Partial Payment</label>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="item.status==statusEnum.Verified && item.settlement_finish=='yes'">Settlement Completed</ng-container>
+                    <ng-container *ngIf="item.status==statusEnum.RequestMoreDetails">
+                      <a href="javascript:void(0)" (click)="editDefaulter(item.id)" class="blue-btn">Upload</a>
+                    </ng-container>
+                    <ng-container *ngIf="item.status==statusEnum.Pending">
+                      <a href="javascript:void(0)" (click)="editDefaulter(item.id)"><i class="fas fa-edit"></i></a>
+                      <a href="javascript:void(0)" (click)="cancleDefaulter(item.id)" class="times-cancel"><i
+                          class="fas fa-times"></i></a>
+                    </ng-container>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-container *ngIf="listData.length==0">
+                <tr>
+                  <td colspan="10">
+                    <app-no-record></app-no-record>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

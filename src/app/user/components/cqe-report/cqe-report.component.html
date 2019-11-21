@@ -1,0 +1,46 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading display-flex align-center"><div>View CIR</div>
+      <div class="ml-auto"><a href="javascript:void(0)" (click)="routerService.RedirectRequestCQEReport()"
+        class="blue-btn request-cibil-report-btn  pull-right">Request CIR</a></div></div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <div class="defaulter-table-sec">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th>GST Number</th>
+                <th>Trade Name</th>
+                <th>Date Requested</th>
+                <th>CIR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-template ngFor let-item [ngForOf]="listData" let-i="index">
+                <tr>
+                  <td data-title="GST Number">{{item.gst_no}}</td>
+                  <td data-title="Customer Name">{{item.company_name}}</td>
+                  <td data-title="Date Requested">
+                    {{dateFormatService.momentDateFormat(item.created)}}</td>
+                  <td data-title="Status" class="text-capitalize">
+                      <a target="_blank" href='{{fileBaseUrl+item.cir_name}}'><i class="fas fa-file-download"></i></a>
+                    <!-- <span *ngIf="item.status==cibilRequestStatus.sent" class="status-circle send"></span> -->
+                    <!-- <span *ngIf="item.status!=cibilRequestStatus.sent" class="status-circle requested"></span>{{item.status}} -->
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-container *ngIf="listData.length==0">
+                <tr>
+                  <td colspan="4">
+                    <app-no-record></app-no-record>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

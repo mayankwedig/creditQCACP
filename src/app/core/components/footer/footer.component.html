@@ -1,0 +1,93 @@
+<footer class="rows footer-wrap">
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 footer-block-1">
+          <div class="footer-logo">
+            <img src="assets/img/main-logo.svg" />
+          </div>
+          <div class="footer-info">CreditQ is a web & app-based startup that deals in a revolutionary financial mobile &
+            web application for B2B MSMEs.</div>
+          <div class="footer-title">Subscribe our newsletter</div>
+          <form name="frmSubscribe" #frmSubscribe="ngForm" class="rows subscribe-form"
+            (ngSubmit)="frmSubscribe.form.valid && save()">
+            <input class="form-control" type="email" placeholder="Email" id="txtEmail" name="txtEmail"
+              #txtEmail="ngModel" [(ngModel)]="postData.email" required email />
+            <button class="subscribe-btn" [disabled]='!frmSubscribe.form.valid' type="submit" c>Submit</button>
+            <br>
+            <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-error-message">
+              <div *ngIf="txtEmail.errors?.required">
+                <!-- // Email is required -->
+              </div>
+              <div *ngIf="txtEmail.errors?.email">
+                <!-- // Enter a valid email address -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 footer-block-2">
+          <div class="footer-video-box">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/Z5ZqEyTQauY" frameborder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-12 footer-block-3">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6">
+              <ul class="footer-menu">
+                <!-- <li><a (click)="route.RedirectHome()" href="javascript:void(0)">Home</a></li> -->
+                <li><a (click)="route.RedirectAbout()" href="javascript:void(0)">About Us</a></li>
+                <li><a href="javascript:void(0);">Portfolio</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectCareer()">Career</a></li>
+                <li><a (click)="route.RedirectGallery()" href="javascript:void(0)">Gallery</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectContact()">Contact us</a></li>
+                <!-- <li><a (click)="route.RedirectSolution()" href="javascript:void(0)">Solutions</a></li>
+                <li><a (click)="route.RedirectHelp()" href="javascript:void(0)">Help</a></li>
+                <li><a (click)="route.RedirectGallery()" href="javascript:void(0)">Gallery</a></li>
+                <li><a (click)="route.RedirectTestimonials()" href="javascript:void(0)">Testimonials</a></li> -->
+              </ul>
+            </div>
+            <div class="col-lg-5 col-sm-6">
+              <ul class="footer-menu">
+                <!-- <li><a href="javascript:void(0)" (click)="route.RedirectPrivacyPolicy()">Privacy Policy </a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectTNC()">Terms & Conditions</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectRNP()">Refund Policy</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectHelp()">FAQs</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectBlog()">Blog</a></li> -->
+
+                <li><a href="javascript:void(0)" (click)="route.RedirectTNC()">T&C</a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectPrivacyPolicy()">Privacy Policy </a></li>
+                <li><a href="javascript:void(0)" (click)="route.RedirectBlog()">Blog</a></li>
+                <li><a href="javascript:void(0);">Investors</a></li>
+                <li><a (click)="route.RedirectTestimonials()" href="javascript:void(0)">Testimonials</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-1">&nbsp;</div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <ul class="social-menu">
+                <li class="fb-icon"><a href="https://www.facebook.com/Creditq.in/" target="_blank"><i
+                      class="fab fa-facebook-f"></i></a></li>
+                <li class="yt-icon"><a
+                    href="https://www.youtube.com/channel/UCFfeQmdNjEPvCGqglgtzfVQ?view_as=subscriber"><i
+                      class="fab fa-youtube" target="_blank"></i></a></li>
+                <li class="lnk-icon"><a href="https://www.linkedin.com/in/mukta-mittal-365904196/" target="_blank"><i
+                      class="fab fa-linkedin-in"></i></a></li>
+                <li class="ins-icon"><a href="https://www.instagram.com/creditq.in/?igshid=1ofq1qtit4ebk"
+                    target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li class="tw-icon"><a href="https://twitter.com/Creditq6" target="_blank"><i
+                      class="fab fa-twitter"></i></a></li>
+                <li class="pin-icon"><a href="https://in.pinterest.com/icreditq/" target="_blank"><i
+                      class="fab fa-pinterest-p"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rows footer-bottom">
+      Copyright &copy; 2019. CreditQ. All Rights Reserved.
+    </div>
+  </div>
+</footer>

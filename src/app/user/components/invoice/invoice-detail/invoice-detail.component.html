@@ -1,0 +1,53 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading display-flex align-center"><div>Invoice Detail</div>
+      <div class="ml-auto"><a href="javascript:void(0)" (click)="redirectBack()" class="blue-btn pull-right">Back</a></div>
+    </div>
+    <div class="my-invoice-detail">
+      <div class="white-box">
+        <div class="row">
+          <!-- <div class="col-md-5 invoice-dtl-left">
+            <div class="invoice-dtl-box">
+              <img src="assets/img/dtl-invoice.jpg" />
+            </div>
+          </div> -->
+          <div class="col-md-7 invoice-dtl-right">
+            <div class="inb-group"><span>Invoice No</span> {{data.invoice_no}}</div>
+            <div class="inb-group"><span>Transaction Id</span> {{data.transaction_id}}</div>
+            <div class="inb-group"><span>Date</span>{{dateFormatService.momentDateFormat(data.created)}}</div>
+            <div class="inb-group"><span>GST Number</span>{{data.gst_no}}</div>
+            <div class="inb-group"><span>Total Amount</span> <i class="fas fa-rupee-sign"></i> {{data.total_amount}}
+            </div>
+            <div class="inb-group" *ngIf="data.discount_amount> 0 "><span>Discount</span> <i class="fas fa-rupee-sign"></i>{{data.discount_amount}}</div>
+            <div class="inb-group" *ngIf="show_gst == 'igst'"><span>IGST</span><i class="fas fa-rupee-sign"></i> {{data.igst_amount}}</div>
+            <div class="inb-group" *ngIf="show_gst == 'state_gst'"><span>CGST</span><i class="fas fa-rupee-sign"></i> {{data.cgst_amount}}</div>
+            <div class="inb-group" *ngIf="show_gst == 'state_gst'"><span>SGST</span><i class="fas fa-rupee-sign"></i> {{data.sgst_amount}}</div>
+            <div class="inb-group"><span>Paid Amount</span> <i class="fas fa-rupee-sign"></i> {{data.paid_amount}}</div>
+            <div class="inb-group"><span>Status</span> {{data.status}}</div>
+            <div *ngIf = "data.payment_type == 'membership'" class="inb-group text-capitalize"><span>Paid For</span>Membership</div>
+            <div *ngIf = "data.payment_type == 'credit_score'" class="inb-group text-capitalize"><span>Paid For</span>Credit Score</div>
+            <div class="inb-group text-capitalize"><span>Payment Method</span> {{data.payment_method}} </div>
+            <div class="inb-group invoice-group text-capitalize">
+                <span class="v-top">Invoice</span>
+                <div class="vd-img-flex">
+                  <a target="_blank" href='{{data.invoice_full_path}}'>
+                    <div class="vd-img-box">
+                      <div class="vd-img">
+                        <img width="70" height="70" src="assets/img/pdf.svg" />
+                      </div>
+                      <!-- <div class="vd-doc-name">{{data.invoice_name}}</div> -->
+                      <div *ngIf = "data.payment_type == 'membership'" class="vd-doc-name">Membership Invoice</div>
+                      <div *ngIf = "data.payment_type == 'credit_score'" class="vd-doc-name">CIR Invoice</div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+            <!-- <br>
+            <a href="javascript:void(0)" (click)="redirectBack()" class="blue-btn text-capitalize">Okay</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

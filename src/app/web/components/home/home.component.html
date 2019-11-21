@@ -1,0 +1,299 @@
+<app-support-form></app-support-form>
+<section class="rows banner-wrap">
+  <div class="home-banner-slider">
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let slide of slidesStore">
+        <ng-template carouselSlide [id]="slide.id">
+          <div class="item">
+            <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+            <div class="hb-position">
+              <div class="container">
+                <div class="hb-content-block">
+                  <div class="hb-content-box">
+                    <div class="hb-heading">{{slide.txt_heading}}</div>
+                    <div class="hb-content">{{slide.txt_content}}</div>
+                  </div>
+                  <div class="mt-20">
+                    <a *ngIf="slide.txt_slug == 'membership'" (click)="route.RedirectMembershipPlan()"
+                      href="javascript:void(0)" class="blue-btn">Read More</a>
+                    <a *ngIf="slide.txt_slug == 'add_defaulter'" (click)="route.RedirectAboutDefualter()"
+                      href="javascript:void(0)" class="blue-btn">Read More</a>
+                    <a *ngIf="slide.txt_slug == 'settle_payment'" (click)="route.RedirectAboutSettlePayment()"
+                      href="javascript:void(0)" class="blue-btn">Read
+                      More</a>
+                    <a *ngIf="slide.txt_slug == 'credit_information_report'" (click)="route.RedirectAboutCreditReport()"
+                      href="javascript:void(0)" class="blue-btn">Read
+                      More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</section>
+<section class="rows who-we-are-wrap">
+  <div class="container">
+    <div class="display-flex align-center who-we-are-sec">
+      <div class="wwa-left">
+        <div class="main-heading text-left">Who we are?</div>
+        <div class="content">
+          <p>CreditQ is a web & app-based startup that deals in a revolutionary financial mobile & web application for
+            B2B MSMEs. Its a B2B app for Micro, Small & Medium Enterprises (MSMEs) that help them in solving the credit
+            problem they
+            largely face and to make them aware of the fraudulent and cheaters in the society. We offer solutions to the
+            many B2B
+            MSMEs in identifying frauds and double-dealers by providing credit scores of an organization, company, firm,
+            proprietor or
+            business.</p>
+        </div>
+        <a href="/about-us" class="blue-btn">Know More</a>
+      </div>
+      <div class="wwa-right">
+        <div class="wwa-img">
+          <img src="assets/img/Company-overview.jpg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="rows how-work-wrap">
+  <div class="container">
+    <div class="main-heading white text-center">How it works?</div>
+    <div class="sub-heading white">We provide list of services which include the following</div>
+    <div class="how-work-sec">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="work-box">
+            <div class="hw-img">
+              <img src="assets/img/services-offered-img2.jpg" />
+              <div class="hw-position">
+                <div class="hw-img-icon">
+                  <img src="assets/img/add-defaulter-icon.png" />
+                </div>
+              </div>
+            </div>
+            <div class="hw-title">Add Defaulter</div>
+            <div class="hw-description">Businesses or MSMEs who have a valid GST registration number and who have
+              already registered as members on CreditQ portal or app. </div>
+            <a href="javascript:void(0)" (click)="routerService.RedirectAboutDefualter()" class="hw-desc-link">VIEW MORE
+              <span class="icon-right-arrow"></span></a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="work-box">
+            <div class="hw-img">
+              <img src="assets/img/services-offered-img4.jpg" />
+              <div class="hw-position">
+                <div class="hw-img-icon">
+                  <img src="assets/img/settle-payment-icon.png" />
+                </div>
+              </div>
+            </div>
+            <div class="hw-title">Settle Payment</div>
+            <div class="hw-description">CreditQ lists defaulters identified and added by the registered members.
+              However, if the concerned parties, the registered</div>
+            <a href="javascript:void(0)" (click)="routerService.RedirectAboutSettlePayment()" class="hw-desc-link">VIEW
+              MORE <span class="icon-right-arrow"></span></a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="work-box">
+            <div class="hw-img">
+              <img src="assets/img/services-offered-img3.jpg" />
+              <div class="hw-position">
+                <div class="hw-img-icon">
+                  <img src="assets/img/credit-report-icon.png" />
+                </div>
+              </div>
+            </div>
+            <div class="hw-title font-17">Credit Information Report</div>
+            <div class="hw-description">CreditQ is a platform where MSMEs and businesses enroll themselves and seek
+              information about other businesses and clients </div>
+            <a href="javascript:void(0)" (click)="routerService.RedirectAboutCreditReport()" class="hw-desc-link">VIEW
+              MORE <span class="icon-right-arrow"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="rows service-offer-wrap">
+  <div class="container">
+    <ng-container *ngFor="let content of contentToShowArray">
+      <ng-container *ngIf="content['memeberShip'] === true">
+        <div class="main-heading text-center">Membership</div>
+        <div class="sub-heading">{{membership_tab}}</div>
+      </ng-container>
+      <ng-container *ngIf="content['addDefaulter'] === true">
+        <div class="main-heading text-center">Add Defaulter</div>
+        <div class="sub-heading">{{add_defaulter_tab}}</div>
+      </ng-container>
+      <ng-container *ngIf="content['cir'] === true">
+        <div class="main-heading text-center">Credit Information Report</div>
+        <div class="sub-heading">{{credit_report_tab}}</div>
+      </ng-container>
+      <ng-container *ngIf="content['settlePaymet'] === true">
+        <div class="main-heading text-center">Settle Payment</div>
+        <div class="sub-heading">{{settle_payment_tab}}</div>
+      </ng-container>
+    </ng-container>
+
+
+    <div id="tabs" class="service-offer-tab">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a (click)="showContentOnClick('memeberShip')" class="nav-item nav-link active" id="so-step1-tab"
+            data-toggle="tab" href="#so-step1" role="tab" aria-controls="so-step1" aria-selected="true">
+            <div class="sot-heading"><span>1</span> Membership</div>
+            <div class="sot-content">{{membership_tab | truncate:95 }}</div>
+          </a>
+          <a (click)="showContentOnClick('addDefaulter')" class="nav-item nav-link" id="so-step2-tab" data-toggle="tab"
+            href="#so-step2" role="tab" aria-controls="so-step2" aria-selected="false">
+            <div class="sot-heading"><span>2</span>Add Defaulter</div>
+            <div class="sot-content">{{add_defaulter_tab | truncate:95 }}</div>
+          </a>
+          <a (click)="showContentOnClick('settlePaymet')" class="nav-item nav-link" id="so-step4-tab" data-toggle="tab"
+            href="#so-step4" role="tab" aria-controls="so-step4" aria-selected="false">
+            <div class="sot-heading"><span>3</span>Settle Payment</div>
+            <div class="sot-content">{{settle_payment_tab | truncate:95 }}</div>
+          </a>
+          <a (click)="showContentOnClick('cir')" class="nav-item nav-link" id="so-step3-tab" data-toggle="tab"
+            href="#so-step3" role="tab" aria-controls="so-step3" aria-selected="false">
+            <div class="sot-heading"><span>4</span>Credit Information Report</div>
+            <div class="sot-content">{{credit_report_tab | truncate:95 }}</div>
+          </a>
+
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="so-step1" role="tabpanel" aria-labelledby="so-step1-tab">
+          <div class="pos-img">
+            <img src="assets/img/home-solution-img1.jpg" />
+          </div>
+          <div class="so-heading">Membership</div>
+          <div class="content">
+            <p>Join CreditQ as member and stay ahead of others. By joining CreditQ as a member you not only
+              save a lot of money but you also cut down your debts and other hassles. Its like you make
+              completely fair business dealings as you do not deal with defaulters.</p>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="so-step2" role="tabpanel" aria-labelledby="so-step2-tab">
+          <div class="pos-img">
+            <img src="assets/img/home-solution-img2.png" />
+          </div>
+          <div class="so-heading">Add Defaulter</div>
+          <div class="content">
+            <p>Adding a defaulter is very easy and completely free for CreditQ registered members. By adding a
+              defaulter, MSMEs not only help themselves but also make sure that other MSMEs do not fall prey
+              to the defaulter. The Defaulters will be exposed all over India as the Credit Information Report
+              and defaulters list will be available to all the members across India.</p>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="so-step3" role="tabpanel" aria-labelledby="so-step3-tab">
+          <div class="pos-img">
+            <img src="assets/img/home-solution-img4.jpg" />
+          </div>
+          <div class="so-heading">Credit Information Report</div>
+          <div class="content">
+            <p>CreditQis a platform where MSMEs and businesses enroll themselves and seek information about
+              other businesses and clients before entering into a business deal. Being a dependable source of
+              authentic information about companies and clients, business owners trust CreditQ and seek its
+              help to make decisions before making any business deal with an altogether new business or client.</p>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="so-step4" role="tabpanel" aria-labelledby="so-step4-tab">
+          <div class="pos-img">
+            <img src="assets/img/home-solution-img3.jpg" />
+          </div>
+          <div class="so-heading">Settle Payment</div>
+          <div class="content">
+            <p>CreditQ lists defaulters identified and added by the registered members. However, if the
+              concerned parties, the registered member and the defaulter agrees and settles the payment then
+              the registered member could remove defaulter’s name from the list of defaulters on CreditQ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="rows testimonials-wrap">
+  <div class="container">
+    <div class="main-heading text-center">What do our members say?</div>
+    <div class="testimonials-content content text-center">
+      <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis lacus velit, sed placerat nisl iaculis
+        vitae.</p> -->
+    </div>
+    <div class="testimonials-box">
+      <div class="testimonials-slider">
+        <owl-carousel-o [options]="testiMoOptions">
+          <ng-container *ngFor="let slide of slidesStore">
+            <ng-template carouselSlide [id]="slide.id">
+              <div class="item">
+                <div class="testimonial-img">
+                  <img src="assets/img/male-avatar-white.png" />
+                </div>
+                <div class="content">
+                  <p>CreditQ has saved my business from a lot of problem. I was about to close a huge deal with a client
+                    but when I checked and cross referenced the client’s credit report on CreditQ, I found that it was a
+                    defaulter in payment to many vendors. I immediately cancelled the deal. Later, I found that the same
+                    client cheated one of the other vendors in my city. </p>
+                </div>
+                <div class="name">Dangiya Lifestyles- <span>Sanjay Agarwal</span></div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide [id]="slide.id">
+              <div class="item">
+                <div class="testimonial-img">
+                  <img src="assets/img/male-avatar-white.png" />
+                </div>
+                <div class="content">
+                  <p>Many thanks to CreditQ for helping me get my payment. I added a defaulter and soon the defaulter
+                    approached me and settled the payment.</p>
+                </div>
+                <div class="name">Kalra Steel Traders Bharatpur- <span>Aashish Kalra</span></div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide [id]="slide.id">
+              <div class="item">
+                <div class="testimonial-img">
+                  <img src="assets/img/male-avatar-white.png" />
+                </div>
+                <div class="content">
+                  <p>CreditQ’s Credit Information Report is transparent, I am its members since its beta trial versions
+                    and it helped me to be cautious of the defaulters. I have checked names of many of the new clients
+                    to verify if they have a good credit report and they are not defaulters. Thanks, CreditQ.</p>
+                </div>
+                <div class="name">Shri Kandelwal trading company - <span>Rajkumar Nirawan</span></div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide [id]="slide.id">
+              <div class="item">
+                <div class="testimonial-img">
+                  <img src="assets/img/testimonial-Sunil-Jain.jpg" />
+                </div>
+                <div class="content">
+                  <p>आज के समय में उद्योग एवं व्यापार ना केवल प्रतिस्पर्धा से भरा है बल्कि जोखिम भरा भी है। पिछले कुछ
+                    समय से ही सिबिल जेसी संस्था बहुत जरूरत महसूस हो रही थी। जो कि क्रेता (बायर) और विक्रेता (सेलर) के
+                    मध्य जोखिम को लेकर पुल का काम कर सके। CREDIT Q की ये पहल स्माल स्केल इंडस्ट्रीज और व्यापारियों के
+                    हितों के साथ न्याय करेगी इसी विश्वास के साथ शुभकानाएं बधाई सभी टीम सदस्यों को</p>
+                </div>
+                <div class="name">Akshya Steel Corporation - <span>Sunil Jain</span></div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <div class="circle-icon circle1"><img src="assets/img/testimonial-img1.png"></div>
+  <div class="circle-icon circle2"><img src="assets/img/testimonial-img2.png"></div>
+  <div class="circle-icon circle3"><img src="assets/img/testimonial-img3.png"></div>
+  <div class="circle-icon circle4"><img src="assets/img/testimonial-img4.png"></div>
+  <div class="circle-icon circle5"><img src="assets/img/testimonial-img5.png"></div>
+  <div class="circle-icon circle6"><img src="assets/img/testimonial-img6.png"></div>
+  <div class="circle-icon circle7"><img src="assets/img/testimonial-img7.png"></div>
+  <div class="circle-icon circle8"><img src="assets/img/testimonial-img8.png"></div>
+</section>

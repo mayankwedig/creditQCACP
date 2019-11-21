@@ -1,0 +1,160 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Dashboard</div>
+    <div class="dash-list">
+      <ul>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Verified,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon defaulter-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label">Users</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Pending,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon pending-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label">Defaulters</div>
+            </div>
+          </a>
+        </li>
+
+        <!-- <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Rejected,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon rejected-icon-bg"><img src="assets/img/rejected-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.rejected}}</div>
+              <div class="dashbox-label"> Rejected Requests</div>
+            </div>
+          </a>
+        </li> -->
+        <!-- <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.RequestMoreDetails,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon rqm-icon-bg"><img src="assets/img/rqm-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.moreDetailsRequested}}</div>
+              <div class="dashbox-label"> RQM Requests</div>
+            </div>
+          </a>
+        </li> -->
+        <!-- <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','settlement')">
+            <div class="white-box">
+              <div class="dash-list-icon view-icon-bg"><img src="assets/img/view-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.sattelment_count}}</div>
+              <div class="dashbox-label">View all Settlements</div>
+            </div>
+          </a>
+        </li> -->
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+            <div class="white-box">
+              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label"> Request CIR</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+            <div class="white-box">
+              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label">Request CIR Revenue</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+            <div class="white-box">
+              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label">Add Defaulters Revenue</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+            <div class="white-box">
+              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+              <div class="dashbox-count">0</div>
+              <div class="dashbox-label">Total Revenue</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--  <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form">
+          <div class="row">
+            <div class="col-md-4 ">
+              <div class="main-subheading mt-10">Users</div>
+            </div>
+            <div class="col-md-8">
+              <div class="pull-right">
+                <div class="display-flex align-center ml-auto">
+                  <div class="pos-rel">
+                    <input class="form-control" placeholder="Select date" name="txtDueSince" #txtDueSince="ngModel"
+                      [(ngModel)]="postData.payment_due_date" ngbDatepicker (click)="d.toggle()" #d="ngbDatepicker"
+                      required>
+                    <span class="calendar-icon"></span>
+                  </div>
+                  <div class="ml-15">
+                    <div class="pos-rel">
+                      <input type="text" [(ngModel)]="postData.gst_no" name="gst_no" class="form-control search-field"
+                        placeholder="Search by GSTN / PAN Card">
+                      <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                    </div>
+                  </div>
+                  <div class="no-padding-l ml-15">
+                    <button class="blue-btn text-capitalize" *ngIf="!isSearch" (click)="searchList()">Search</button>
+                    &nbsp; <button *ngIf="isSearch" class="transparent-btn defaulter-btn text-capitalize"
+                      (click)="resetSearch()" style="max-width: 136px;">Reset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="defaulter-table-sec table-responsive">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th width="11.11%">Names</th>
+                <th width="11.11%">GSTN / Pan Card</th>
+                <th width="11.11%">User ID</th>
+                <th width="11.11%">Total Defaulters</th>
+                <th width="11.11%">Total CIR Requests</th>
+                <th width="11.11%">Revenue through Defaulters</th>
+                <th width="11.11%">Revenue through CIR</th>
+                <th width="11.11%">Total Revenue</th>
+                <th width="11.11%">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width="11.11%" data-title="Names">Jain & Co.</td>
+                <td width="11.11%" data-title="GSTN / Pan Card">AUUPM0015D</td>
+                <td width="11.11%" data-title="User ID">JCU001</td>
+                <td width="11.11%" data-title="Total Defaulters">1</td>
+                <td width="11.11%" data-title="Total CIR Requests">0</td>
+                <td width="11.11%" data-title="Revenue through Defaulters"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Revenue through CIR"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Total Revenue"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Status">
+                  <span style="color: green;">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+</section>

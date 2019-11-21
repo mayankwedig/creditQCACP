@@ -1,0 +1,200 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading display-flex align-center"><div>Profile</div>
+      <div class="ml-auto"><a href="javascript:void(0);" (click)="redirectChangePassword()" class="blue-btn pull-right">Change Password</a></div>
+    </div>
+    <div class="profile-sec ">
+      <div class="white-box">
+        <div class="display-flex">
+          <div class="profile-right">
+            <div class="display-flex align-center">
+              <div>GST Number</div>
+              <div>{{loginUser.gst_no}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Legal Name</div>
+              <div>{{loginUser.company_name}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>State Jurisdiction</div>
+              <div>{{loginUser.state_jurisdiction}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Nature of Business Activity</div>
+              <div>{{loginUser.nature_business_activity}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Trade Name</div>
+              <div>{{loginUser.trade_name}}</div>
+            </div>
+
+            <div class="display-flex align-center">
+              <div>PAN Number</div>
+              <div *ngIf="loginUser.pan_no != '' && loginUser.pan_no != null && loginUser.pan_no != 'null'">
+                {{loginUser.pan_no}}</div>
+              <div *ngIf="loginUser.pan_no == '' || loginUser.pan_no == null || loginUser.pan_no == 'null'">-</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Address</div>
+              <div>{{commonService.combineAddress(loginUser)}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Mobile Number</div>
+              <div>{{loginUser.mobile}}</div>
+            </div>
+            <div class="display-flex align-center">
+              <div>Email Id</div>
+              <div>{{loginUser.email}}</div>
+            </div>
+            <!-- <div class="display-flex align-center profile-action">
+              <a href="#" class="blue-btn">Save</a>
+              <a href="#" class="blue-btn margin_left10">Edit Profile</a>
+              <a href="#" class="cf-transparent-btn">Cancel</a>
+            </div> -->
+          </div>
+          <div class="profile-left ml-auto padding_l5">
+            <div class="profile-box">
+              <div class="profiel-circle">
+                <img src='{{loginUser.avatar}}' onError="this.src='assets/img/user.png';" alt="">
+              </div>
+              <div class="text-center">
+                <div class="pos-rel">
+                  <input type="file" class="edit" accept="image/*" (change)="handleInputChange($event)" required />
+                  <span class="change-profile">Change picture</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="profileImageError != ''" class="alert alert-error-message">{{profileImageError}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="margin_bottom20">&nbsp;</div>
+
+    <div class="main-heading pad">Bank Details </div>
+    <div class="profile-sec">
+      <div class="white-box">
+        <div class="display-flex">
+          <ng-container *ngIf="!editBank">
+            <div class="profile-right">
+              <div class="display-flex align-center">
+                <div>Bank Name</div>
+                <div>{{bankDetails.bank_name?bankDetails.bank_name:'-'}}</div>
+              </div>
+              <div class="display-flex align-center">
+                <div>Branch Name</div>
+                <div>{{bankDetails.branch_name?bankDetails.branch_name:'-'}}</div>
+              </div>
+              <div class="display-flex align-center">
+                <div>IFSC Code</div>
+                <div>{{bankDetails.ifsc_code?bankDetails.ifsc_code:'-'}}</div>
+              </div>
+
+              <div class="display-flex align-center">
+                <div>Account Name</div>
+                <div>{{bankDetails.account_name?bankDetails.account_name:'-'}}</div>
+              </div>
+              <div class="display-flex align-center">
+                <div>Account Number</div>
+                <div>{{bankDetails.account_no?bankDetails.account_no:'-'}}</div>
+              </div>
+              <div class="display-flex align-center ">
+                <a href="javascript:void(0);" (click)="editBankDetails(true)" class="blue-btn">Edit Bank</a>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="editBank">
+            <div class="profile-right">
+
+              <form class="custom-form " name="bankFrm" #bankFrm="ngForm"
+                (ngSubmit)="bankFrm.form.valid && submitBank()" novalidate>
+                <div class="row">
+                  <div class="col-lg-7 col-md-8">
+                    <div class="form-group">
+                      <label>IFSC Code</label>
+                      <input type="text" name="txtIFSCCode" maxlength="50" (change)="textChange();getBankByIFSC()"
+                        [(ngModel)]="bankDetails.ifsc_code" class="form-control" #txtIFSCCode="ngModel"
+                        placeholder="Enter IFSC code" required>
+                      <div *ngIf="txtIFSCCode.invalid && (txtIFSCCode.dirty || txtIFSCCode.touched )"
+                        class="alert alert-error-message">
+                        <div *ngIf="txtIFSCCode.errors?.required">
+                          IFSC Code is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Bank Branch</label>
+                      <input type="text" name="txtBranchName" maxlength="50" (change)="textChange()"
+                        [(ngModel)]="bankDetails.branch_name" class="form-control" #txtBranchName="ngModel"
+                        placeholder="Enter bank branch" (keypress)=commonService._keyPressString($event) required>
+                      <div *ngIf="txtBranchName.invalid && (txtBranchName.dirty || txtBranchName.touched )"
+                        class="alert alert-error-message">
+                        <div *ngIf="txtBranchName.errors?.required">
+                          Branch Name is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Bank Name</label>
+                      <input type="text" name="txtBankName" maxlength="50" (change)="textChange()"
+                        [(ngModel)]="bankDetails.bank_name" class="form-control" #txtBankName="ngModel"
+                        placeholder="Enter account holder name" (keypress)=commonService._keyPressString($event)
+                        required>
+                      <div *ngIf="txtBankName.invalid && (txtBankName.dirty || txtBankName.touched )"
+                        class="alert alert-error-message">
+                        <div *ngIf="txtBankName.errors?.required">
+                          Bank Name is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" name="txtAccountName" maxlength="50" (change)="textChange()" [(ngModel)]="bankDetails.account_name" class="form-control" #txtAccountName="ngModel" placeholder="Enter account holder name" pattern="[a-zA-Z ]*" required>
+                      <div *ngIf="txtAccountName.invalid && (txtAccountName.dirty || txtAccountName.touched )" class="alert alert-error-message">
+                        <div *ngIf="txtAccountName.errors?.required">Account Name is required</div>
+                        <div *ngIf="txtAccountName.errors?.pattern">Please enter only letters</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Account Number </label>
+                      <input type="password" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" name="txtAccountNo" maxlength="20" (change)="textChange()" [(ngModel)]="bankDetails.account_no" class="form-control" #txtAccountNo="ngModel" placeholder="Enter account number" (keypress)=_keyPress($event) required>
+                      <div *ngIf="txtAccountNo.invalid && (txtAccountNo.dirty || txtAccountNo.touched )" class="alert alert-error-message">
+                        <div *ngIf="txtAccountNo.errors?.required">Account Number is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Confirm Account Number</label>
+                      <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" name="txtConfirmAccountNo" maxlength="20" (change)="textChange()"
+                        [(ngModel)]="bankDetails.confirm_account_no" class="form-control" #txtConfirmAccountNo="ngModel"
+                        placeholder="Enter confirm account number" (keypress)=_keyPress($event) required>
+                      <div
+                        *ngIf="txtConfirmAccountNo.invalid && (txtConfirmAccountNo.dirty || txtConfirmAccountNo.touched )"
+                        class="alert alert-error-message">
+                        <div *ngIf="txtConfirmAccountNo.errors?.required">
+                          Confirm Account Number is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="errorMessage" class="alert alert-error-message">
+                      {{errorMessage}}
+                    </div>
+
+                    <div class="margin_top30">
+                      <button type="submit" [disabled]="!bankFrm.form.valid" class="blue-btn ">Save </button>
+                      <a href="javascript:void(0);" (click)="editBankDetails(false)"
+                        class="cf-transparent-btn">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

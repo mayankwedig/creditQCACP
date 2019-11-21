@@ -1,0 +1,109 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Defaulter Detail
+      <a href="javascript:void(0)" (click)="redirectBack()" class="blue-btn pull-right">Back</a>
+    </div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <div class="view-defaulter-block">
+          <div class="vd-block-flex align-center">
+            <div class="label">GST Number</div>
+            <div class="vd-info">{{data.gst_no}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Trade Name</div>
+            <div class="vd-info">{{data.trade_name}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Legal Name</div>
+            <div class="vd-info">{{data.company_name}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Email Address</div>
+            <div class="vd-info">{{data.email}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Mobile Number</div>
+            <div class="vd-info">{{data.mobile}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">UDIN number</div>
+            <div class="vd-info">{{data.udin_no}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Payment Due Amount</div>
+            <div class="vd-info"><i class="fas fa-rupee-sign"></i> {{data.payment_due_amount}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Payment Due Since</div>
+            <div class="vd-info">{{dateFormatService.momentDateFormat(data.payment_due_date)}}
+            </div>
+          </div>
+          <div class="vd-block-flex align-top">
+            <div class="label">Description</div>
+            <div class="vd-info">{{data.description}}</div>
+          </div>
+          <div class="vd-block-flex align-top">
+            <div class="label">Legal Case</div>
+            <div class="vd-info">{{data.legal_case}}</div>
+          </div>
+
+        </div>
+        <div class="view-defaulter-block">
+          <div class="vd-block-flex align-top-res">
+            <div class="label">Defaulter Document</div>
+            <div class="vd-img-flex">
+              <ng-template ngFor let-item [ngForOf]="data.documents" let-i="index">
+                <a target="_blank" href='{{item.file}}'>
+                  <div class="vd-img-box">
+                    <div class="vd-img">
+                      <img width="70" height="70" src="assets/img/pdf.svg" />
+                    </div>
+                    <div class="vd-doc-name">{{item.title}}</div>
+                  </div>
+                </a>
+              </ng-template>
+              <!-- <div class="vd-img-box">
+                          <div class="vd-img"><img src="img/invoice1.jpg" /></div>
+                          <div class="vd-doc-name">Defaulter CA certificate</div>
+                        </div>
+                        <div class="vd-img-box">
+                          <div class="vd-img"><img src="img/invoice1.jpg" /></div>
+                          <div class="vd-doc-name">Other</div>
+                        </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="view-defaulter-block" *ngIf="data.settlements!=null && data.settlements.length>0">
+          <div class="vd-block-flex align-top-res">
+            <div class="label">Settled History</div>
+            <div class="defaulter-table-sec table-responsive pd-0">
+              <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-template ngFor let-item [ngForOf]="data.settlements" let-i="index">
+                    <tr>
+                      <td data-title="Date">
+                        {{dateFormatService.momentDateFormat(item.payment_date)}}
+                      </td>
+                      <td data-title="Amount">
+                        <i class="fas fa-rupee-sign"></i>{{item.amount}}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

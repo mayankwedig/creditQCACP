@@ -1,0 +1,94 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading display-flex align-center"><div>{{settlementTypeText}} Payment Settlement</div> <div class="ml-auto"><a href="javascript:void(0)"
+        (click)="redirectBack()" class="blue-btn pull-right">Back</a></div></div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form" name="settlementFrm" #settlementFrm="ngForm"
+          (ngSubmit)="settlementFrm.form.valid && save()" novalidate>
+          <div class="row">
+            <div class="col-lg-5 col-md-6">
+              <div class="form-group active">
+                <label>GST Number</label>
+                <input type="text" name="txtGSTNo" disabled [(ngModel)]="data.gst_no" class="form-control"
+                  placeholder="">
+              </div>
+              <div class="form-group active">
+                <label>Name</label>
+                <input type="text" name="txtCompanyNa me" disabled [(ngModel)]="data.company_name" class="form-control"
+                  placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Due Amount</label>
+                <input type="text" name="txtDueAmount" disabled [(ngModel)]="data.payment_due_amount" digitOnly
+                  decimal="true" class="form-control" placeholder="Enter amount(INR)" inputmode="numeric"
+                  pattern="[0-9]*">
+              </div>
+              <div class="form-group">
+                <label>Payment Due Date</label>
+                <input type="text" name="txtPaymentDueDate" disabled [(ngModel)]="data.payment_due_date"
+                  class="form-control">
+              </div>
+
+              <div class="form-group" *ngIf="data.settlement_amount>0">
+                <label>Previous Settle Amount</label>
+                <input type="text" name="txtPreviousSettleAmount" disabled [(ngModel)]="data.settlement_amount"
+                  class="form-control">
+              </div>
+
+              <div class="form-group" *ngIf="data.settlement_amount>0">
+                <label>Remaining Amount</label>
+                <input type="text" name="txtRemainingAmount" disabled
+                  [(ngModel)]="data.payment_due_amount- data.settlement_amount" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Amount<span class="alert alert-error-message">*</span></label>
+                <input type="text" name="txtAmount" id="txtAmount" [(ngModel)]="data.amount" #txtAmount="ngModel"
+                  decimal="true" class="form-control" placeholder="Enter amount (INR)" inputmode="numeric"
+                  pattern="[0-9]*" digitOnly required>
+                <div *ngIf="txtAmount.invalid && (txtAmount.dirty || txtAmount.touched || settlementFrm.form.valid)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtAmount.errors?.required">Settlement Amount is required</div>
+                </div>
+                <div *ngIf="spSettlementAmountError != ''" class="alert alert-error-message">{{spSettlementAmountError}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Settlement Date<span class="alert alert-error-message">*</span></label>
+                <div class="pos-rel">
+                  <input autocomplete="false" [maxDate]="maxDate" [minDate]="minDate" id="txtSettleDate"
+                    class="form-control" placeholder="Select date ( dd-mm-yyyy )" name="txtSettleDate"
+                    [(ngModel)]="data.settlement_date1" #txtSettleDate="ngModel" ngbDatepicker (click)="d.toggle()"
+                    #d="ngbDatepicker" required>
+                  <span class="calendar-icon" (click)="d.toggle()"></span>
+                </div>
+                <div *ngIf="txtSettleDate.invalid && (txtSettleDate.dirty || txtSettleDate.touched)"
+                  class="alert alert-error-message">
+                  <div *ngIf="txtSettleDate.errors?.required">
+                    Settlement Date is required
+                  </div>
+                </div>
+                <div *ngIf="spDueDateError != ''" class="alert alert-error-message">{{spDueDateError}}</div>
+              </div>
+              <div class="form-group" *ngIf="settlementTypeText != 'Partial'">
+                <div class="custom-checkbox">
+                  <input type="checkbox" [checked]="data.temp_settlement_finish"
+                    (change)="data.temp_settlement_finish = !data.temp_settlement_finish" id="chkRightOff"
+                    name="chkRightOff" class="input-checkbox">
+                  <label for="chkRightOff"><span>Write Off</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button type="submit" [disabled]='!settlementFrm.form.valid'
+              class="blue-btn defaulter-btn settle-payment-btn">Settle</button>
+            <a href="javascript:void(0);" (click)="routerService.RedirectPendingSettlements()"
+              class="transparent-btn defaulter-btn settle-payment-btn">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

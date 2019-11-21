@@ -1,0 +1,96 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Settle Payment</div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="pos-rel">
+                  <input type="text" [(ngModel)]="postData.gst_no" name="gst_no" class="form-control search-field"
+                    placeholder="Search by GST number">
+                  <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                </div>
+              </div>
+              <div class="col-md-6 no-padding-l">
+                <button class="blue-btn text-capitalize" *ngIf="!isSearch" (click)="searchList()">Search</button>
+                &nbsp; <button *ngIf="isSearch" class="transparent-btn defaulter-btn text-capitalize"
+                  (click)="resetSearch()" style="max-width: 136px;">Reset</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="defaulter-table-sec table-responsive">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th>GST Number</th>
+                <th>Trade Name</th>
+                <th>Due Date</th>
+                <th>Due Amount</th>
+                <th>Partial payment</th>
+                <th>Balance Amount</th>
+                <th>Status</th>
+                <th>Settle Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-template ngFor let-item [ngForOf]="listData" let-i="index">
+                <tr>
+                  <td data-title="GST Number">
+                    <a class="blue-text" href="javascript:void(0)" (click)="viewDetail(item.id)">{{item.gst_no}}</a>
+                  </td>
+                  <td data-title="Trade Name">
+                    {{item.trade_name}}
+                  </td>
+                  <td data-title="Due Date">
+                    {{dateFormatService.momentDateFormat(item.payment_due_date)}}</td>
+                  <td data-title="Due Amount"><i class="fas fa-rupee-sign"></i>{{item.payment_due_amount}} </td>
+                  <td data-title="Partial payment"><i class="fas fa-rupee-sign"></i>{{item.settlement_amount}}
+                  </td>
+                  <td data-title="Balance Amount" *ngIf="item.payment_due_amount-item.settlement_amount > 0"><i
+                      class="fas fa-rupee-sign"></i>{{(item.payment_due_amount-item.settlement_amount)}}</td>
+                  <td data-title="Balance Amount" *ngIf="!item.payment_due_amount-item.settlement_amount > 0"><i
+                      class="fas fa-rupee-sign"></i>0.00</td>
+                  <td data-title="Status" class="text-capitalize">{{item.status}}</td>
+                  <td data-title="Settle Payment">
+                    <ng-container *ngIf="item.status==statusEnum.Verified && item.settlement_finish!='yes'">
+                      <div class="ct-dropdown">
+                        <span class="ct-btn">
+                          <a href="javascript:void(0)" (click)="loadJS($event)">Settle</a>
+                          <a href="javascript:void(0)" (click)="loadJS($event)" class="arrow jq_arrow"></a>
+                          <div class="ct-dropdown-menu">
+                            <div class="custom-radio">
+                              <input type="radio" id="test11" name="radio-group" checked>
+                              <label for="test11" (click)="settlement(item.id,settlementType.Full)">Full
+                                Payment</label>
+                            </div>
+                            <div class="custom-radio">
+                              <input type="radio" id="test12" name="radio-group">
+                              <label for="test12" (click)="settlement(item.id,settlementType.Partial)"> Partial
+                                Payment</label>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    </ng-container>
+
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-container *ngIf="listData.length==0">
+                <tr>
+                  <td colspan="9">
+                    <app-no-record></app-no-record>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

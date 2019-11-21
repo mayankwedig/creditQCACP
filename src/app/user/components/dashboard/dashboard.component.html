@@ -1,0 +1,65 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Dashboard</div>
+    <div class="dash-list">
+      <ul>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Verified,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon defaulter-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.defaulters}}</div>
+              <div class="dashbox-label"> View defaulters</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Pending,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon pending-icon-bg"><img src="assets/img/pending-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.pending+dashboardData.processing}}</div>
+              <div class="dashbox-label"> Pending and Processing Requests</div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Rejected,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon rejected-icon-bg"><img src="assets/img/rejected-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.rejected}}</div>
+              <div class="dashbox-label"> Rejected Requests</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.RequestMoreDetails,'defaulter')">
+            <div class="white-box">
+              <div class="dash-list-icon rqm-icon-bg"><img src="assets/img/rqm-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.moreDetailsRequested}}</div>
+              <div class="dashbox-label"> RQM Requests</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','settlement')">
+            <div class="white-box">
+              <div class="dash-list-icon view-icon-bg"><img src="assets/img/view-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.sattelment_count}}</div>
+              <div class="dashbox-label">View all Settlements</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+            <div class="white-box">
+              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+              <div class="dashbox-count">{{dashboardData.cir_report_count}}</div>
+              <div class="dashbox-label"> Request CIR</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+<!-- <div class="success-icon">
+  <img src="assets/img/check-icon.png" />
+</div>
+<div class="modal-heading text-center">Payment Failed</div>
+<br />
+<div class="modal-subheading text-center">Your payment has been failed! Please try again<br /></div>
+<br />
+<br />
+<a href="javascript:void(0);" (click)="closePopup()" class="blue-btn full-width-btn">Okey</a> -->
+
+<section class="rows block-wrap">
+	<div class="container">
+		<div class="white-box">
+			<div class="icon">
+				<img src="assets/img/failer-icon.svg" />
+			</div>
+			<div class="main-heading text-center">Payment Failed</div>
+			<div class="content text-center">
+				<p>Your payment process has not been completed, Please try again.</p>
+				<p><strong>{{failted_reason}}</strong></p>
+			</div>
+			<div *ngIf="payment_type == 'membership'" class="text-center"><a href="javascript:void(0);" (click) ="goTOHome()" class="blue-btn">Go to Home</a></div>
+			<div *ngIf="payment_type == 'credit_score'" class="text-center"><a href="javascript:void(0);" (click) ="goTODashbord()" class="blue-btn">Go to Home</a></div>
+		</div>
+	</div>
+</section>

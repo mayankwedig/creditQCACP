@@ -1,0 +1,68 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">My Invoices</div>
+    <div class="invoice-list">
+      <ul>
+        <ng-template ngFor let-item [ngForOf]="listData" let-i="index">
+          <li>
+            <div class="white-box">
+              <!-- <div class="invoice-top">
+                <img src="assets/img/invoice1.jpg" />
+              </div> -->
+              <div class="invoice-top custom-invoice-box">
+                <div class="display-flex">
+                  <div class="ci-box-left">
+                    <div class="">
+                      <img style="width: 70px;" src="assets/img/main-logo.svg">
+                    </div>
+                    <div>
+                      <div class="ci-box-heading">Information</div>
+                      <div class=""><strong>Transaction Id :</strong> {{ item.order_no}}</div>
+                      <div class=""><strong>Date :</strong>
+                        {{dateFormatService.momentDateFormat(item.created)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ci-box-right">
+                    <strong>{{loginUser.company_name}}</strong> <br>
+                    {{loginUser.street? (loginUser.street + ',') :''}}
+                    {{loginUser.location? loginUser.location :''}} <br>
+                    {{loginUser.city_name}} - {{loginUser.pin_code}} <br>
+                    <strong>GSTIN :</strong> {{loginUser.gst_no}} <br>
+                  </div>
+                </div>
+                <div class="">
+                  <table cellpadding="" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>GST</th>
+                        <th>Total Amount</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="invoice-bottom">
+                <div class="inb-group"><span>Invoice No </span>{{item.invoice_no}}</div>
+                <div class="inb-group"><span>Date</span>
+                  {{dateFormatService.momentDateFormat(item.created)}}
+                </div>
+                <div class="inb-group"><span>Amount</span><i class="fas fa-rupee-sign"></i>{{ item.paid_amount}}</div>
+                <a href="javascript:void(0)" (click)="viewDetail(item.id)" class="blue-btn full-width-btn">View
+                  Details</a>
+              </div>
+            </div>
+          </li>
+        </ng-template>
+        <ng-container *ngIf="listData.length==0">
+          <li style="width: 100%">
+            <app-no-record></app-no-record>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</section>

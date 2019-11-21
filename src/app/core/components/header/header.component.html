@@ -1,0 +1,66 @@
+<header class="rows header-wrap fix">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-3">
+        <div class="main-logo">
+          <a href="/"><img src="assets/img/main-logo.svg" /></a>
+        </div>
+      </div>
+      <div class="col-lg-7 col-md-5 col-2">
+        <div class="jq_overlay"></div>
+        <app-nav-menu></app-nav-menu>
+      </div>
+      <ng-container *ngIf="!authService.isAuthenticated()">
+        <div class="col-lg-3 col-md-5 col-7 text-right">
+          <a href="javascript:void(0);" (click)="openLogin()" class="small-btn login-btn">Login</a> &nbsp;
+          <a href="javascript:void(0);" class="small-btn signup-btn" (click)="openRegistration()" data-toggle="modal"
+            data-target="#registerModal">Signup</a>
+          <div class="mobile-inner-header">
+            <div class="mobile-inner-header-icon mobile-inner-header-icon-out jq_main_menu" >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="authService.isAuthenticated()">
+        <div class="col-lg-3 col-md-5 col-7 text-right">
+          <div class="custom-dropdown-menu">
+            <a href="javascript:void(0)" class="jq_login_menu" (click)="toggelClass()">
+              <div class="display-flex align-center after-lu-dtl">
+                <div class="header-user-info">
+                  <div class="header-user-name">{{loginUser.trade_name}}</div>
+                  <div class="user-mail">{{loginUser.email}}</div>
+                </div>
+                <div class="profile-pic"><img src='{{ loginUser.avatar}}' onError="this.src='assets/img/user.png';"
+                    alt=""></div>
+              </div>
+            </a>
+            <ul class="custom-dropdown-submenu">
+              <li class="">
+                <a href="javascript:void(0)" (click)="routerService.RedirectDashboard()" class=""><i class="fas fa-home"
+                    aria-hidden="true"></i>Dashboard</a>
+              </li>
+              <li class="">
+                <a href="javascript:void(0)" (click)="routerService.RedirectProfile()" class=""><i class="fas fa-user"
+                    aria-hidden="true"></i>Profile</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="logout()" class="">
+                  <img src="assets/img/logout.svg" alt="">Logout</a>
+              </li>
+            </ul>
+          </div>
+          <div class="mobile-inner-header">
+            <div class="mobile-inner-header-icon mobile-inner-header-icon-out jq_main_menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,72 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <form class="custom-form">
+      <div class="display-flex align-center md-20">
+        <div class=" ">
+          <div class="main-heading mb-0">Professional's Users</div>
+        </div>
+        <div class="ml-auto">
+          <div class="pull-right">
+            <div class="display-flex align-center ml-auto">
+              <div class="pos-rel">
+                <input class="form-control" placeholder="Select date" name="txtDueSince" #txtDueSince="ngModel"
+                  [(ngModel)]="postData.payment_due_date" ngbDatepicker (click)="d.toggle()" #d="ngbDatepicker"
+                  required>
+                <span class="calendar-icon"></span>
+              </div>
+              <div class="ml-15">
+                <div class="pos-rel">
+                  <input type="text" [(ngModel)]="postData.gst_no" name="gst_no" class="form-control search-field"
+                    placeholder="Search by GSTN / PAN Card/ User Name">
+                  <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                </div>
+              </div>
+              <div class="no-padding-l ml-15">
+                <button class="blue-btn text-capitalize" *ngIf="!isSearch" (click)="searchList()">Search</button>
+                &nbsp; <button *ngIf="isSearch" class="transparent-btn defaulter-btn text-capitalize"
+                  (click)="resetSearch()" style="max-width: 136px;">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <div class="defaulter-table-sec table-responsive">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th width="11.11%">Names</th>
+                <th width="11.11%">GSTN / Pan Card</th>
+                <th width="11.11%">User ID</th>
+                <th width="11.11%">Total Defaulters</th>
+                <th width="11.11%">Total CIR Requests</th>
+                <th width="11.11%">Revenue through Defaulters</th>
+                <th width="11.11%">Revenue through CIR</th>
+                <th width="11.11%">Total Revenue</th>
+                <th width="11.11%">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width="11.11%" data-title="Names">Jain & Co.</td>
+                <td width="11.11%" data-title="GSTN / Pan Card">AUUPM0015D</td>
+                <td width="11.11%" data-title="User ID">JCU001</td>
+                <td width="11.11%" data-title="Total Defaulters">1</td>
+                <td width="11.11%" data-title="Total CIR Requests">0</td>
+                <td width="11.11%" data-title="Revenue through Defaulters"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Revenue through CIR"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Total Revenue"><i class="fas fa-rupee-sign"></i>0</td>
+                <td width="11.11%" data-title="Status">
+                  <span style="color: green;">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
