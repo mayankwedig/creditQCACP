@@ -1,0 +1,31 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">Defaulted BY Detail
+      <a href="javascript:void(0)" (click)="redirectBack()" class="blue-btn pull-right">Back</a>
+    </div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <div class="view-defaulter-block">
+          <div class="vd-block-flex align-center">
+            <div class="label">Name</div>
+            <div class="vd-info">{{data.trade_name}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">GST Number</div>
+            <div class="vd-info">{{data.gst_no}}</div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Date</div>
+            <div class="vd-info">{{dateFormatService.momentDateFormat(data.payment_due_date)}}
+            </div>
+          </div>
+          <div class="vd-block-flex align-center">
+            <div class="label">Due Amount</div>
+            <div class="vd-info"><i class="fas fa-rupee-sign"></i> {{data.payment_due_amount}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

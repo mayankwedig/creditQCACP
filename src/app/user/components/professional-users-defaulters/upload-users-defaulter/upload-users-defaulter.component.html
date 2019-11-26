@@ -1,0 +1,335 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading display-flex align-center">
+      <div>{{header}} Defaulter</div>
+      <div class="ml-auto">
+        <a href="javascript:void(0)" *ngIf="nextStep" (click)="back()" class="blue-btn pull-right">Back</a></div>
+    </div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box pos-rel">
+        <ng-container *ngIf="!nextStep && mobileVerifyStep == false">
+          <form class="custom-form">
+            <div class="form-group">
+              <div class="form-group defaulter-step1">
+                <div class="row">
+                  <div class="col-lg-6 col-md-7">
+                    <select class="form-control">
+                      <option value="">Select user</option>
+                      <option value="u1">User1</option>
+                      <option value="u2">User2</option>
+                      <option value="u3">User3</option>
+                      <option value="u4">User4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-8">
+                  <div class="pos-rel">
+                    <input ToUpperCase type="text" name="search_gst" [(ngModel)]="postData.gst_no" class="form-control"
+                      placeholder="Search by GST number" required ToUpperCase>
+                    <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                  </div>
+                  <div *ngIf="searchGSTnumberError != ''" class="alert alert-error-message">{{searchGSTnumberError}}
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-4 no-padding-l">
+                  <button class="blue-btn" (click)="search()">Search</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+        <ng-container *ngIf="customerData.gst_no !=null && customerData.gst_no !='' && mobileVerifyStep == false">
+
+          <form class="custom-form" name="defaulterFrm" #defaulterFrm="ngForm"
+            (ngSubmit)="defaulterFrm.form.valid && verifySelectedUserMobileNumber()" id="defaulterFrm" novalidate>
+            <ng-container *ngIf="!nextStep">
+              <div class="row">
+                <div class="col-lg-5 col-md-8">
+                  <div class="form-group active">
+                    <label>GST Number</label>
+                    <input type="text" disabled name="txtGST" [(ngModel)]="customerData.gst_no"
+                      class="form-control disabled" placeholder="" required>
+                    <div *ngIf="addDefaulterGSTnumberError != ''" class="alert alert-error-message">
+                      {{addDefaulterGSTnumberError}}</div>
+                  </div>
+                  <div class="form-group active">
+                    <label> Legal Name</label>
+                    <input type="text" disabled name="txtName" [(ngModel)]="customerData.company_name"
+                      class="form-control disabled" placeholder="" required>
+                  </div>
+                  <div class="form-group active">
+                    <label>State Jurisdiction</label>
+                    <input type="text" disabled name="txtStateJurisdiction"
+                      [(ngModel)]="customerData.state_jurisdiction" class="form-control disabled" placeholder=""
+                      required>
+                  </div>
+                  <div class="form-group active">
+                    <label>Nature of Business Activity</label>
+                    <input type="text" disabled name="txtNatureBusinessActivity"
+                      [(ngModel)]="customerData.nature_business_activity" class="form-control disabled" placeholder=""
+                      required>
+                  </div>
+                  <div class="form-group active">
+                    <label>Trade Name</label>
+                    <input type="text" disabled name="txtTradeName" [(ngModel)]="customerData.trade_name"
+                      class="form-control disabled" placeholder="" required>
+                  </div>
+                  <div class="form-group active">
+                    <label>Address</label>
+                    <textarea rows="2" name="txtAddress" disabled [(ngModel)]="customerData.address"
+                      class="form-control disabled" placeholder="Address"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Email Address<span class="alert alert-error-message">*</span></label>
+                    <input type="text" name="txtEmail" #txtEmail="ngModel" [(ngModel)]="customerData.email"
+                      class="form-control" placeholder="Enter email address" (blur)="removeError();" required email>
+
+                    <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtEmail.errors?.required">Email is required</div>
+                      <div *ngIf="txtEmail.errors?.email">Enter a valid email address</div>
+                    </div>
+                    <div *ngIf="addDefaulterEmailError != ''" class="alert alert-error-message">
+                      {{addDefaulterEmailError}}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Mobile Number<span class="alert alert-error-message">*</span></label>
+                    <input type="text" digitOnly #txtMobile="ngModel" name="txtMobile" minlength="10" maxlength="10"
+                      class="form-control" [(ngModel)]="customerData.mobile" placeholder="Enter mobile number" required>
+                    <div *ngIf="txtMobile.invalid && (txtMobile.dirty || txtMobile.touched )"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtMobile.errors?.required">
+                        Mobile is required
+                      </div>
+                      <div *ngIf="txtMobile.errors?.minlength">
+                        Invalid Mobile number
+                      </div>
+                    </div>
+                    <div *ngIf="addDefaulterMobileError != ''" class="alert alert-error-message">
+                      {{addDefaulterMobileError}}</div>
+                  </div>
+                  <div>
+                    <button class="blue-btn" [disabled]='!defaulterFrm.form.valid' (click)="proceed()">Next</button>
+                  </div>
+                </div>
+              </div>
+
+            </ng-container>
+            <!-- <hr class="custom-hr"> -->
+            <ng-container *ngIf="nextStep">
+              <div class="form-group">
+                <label>Upload Ledger Certificate<span class="alert alert-error-message">*</span> </label>
+                <div class="row">
+                  <div class="col-lg-5 col-md-8">
+                    <div class="input-container">
+                      <span class="file-info" *ngIf="ledgerFile != null">{{ledgerFileName}}</span>
+                      <input type="file" id="ufLedger" accept="pdf/*" (change)="handleLedgerChange($event)" required>
+                      <button class="browse-btn">Choose File</button>
+                    </div>
+                    <div *ngIf="ledgerFile != null" class="check-mark"></div>
+                    <span class="note-info">(Only PDF file is allowed and please make sure
+                      that the text is readable)</span>
+                  </div>
+                  <!-- <div class="col-lg-7 col-md-4 no-padding-l">
+                    <div class="display-flex align-center">
+                      <a href="javascript:void(0)" class="blue-link">Demo</a>
+                    </div>
+                  </div> -->
+                </div>
+                <div *ngIf="addDefaulterLedgerFileError != ''" class="alert alert-error-message">
+                  {{addDefaulterLedgerFileError}}</div>
+              </div>
+              <div class="form-group">
+                <label>Upload CA Certificate <span class="alert alert-error-message">*</span></label>
+                <div class="row">
+                  <div class="col-lg-5 col-md-8">
+                    <div class="input-container">
+                      <span class="file-info" *ngIf="caFile != null">{{caFileName}}</span>
+                      <input type="file" id="ufCA" accept="pdf/*" (change)="handleCAChange($event)" required>
+                      <button class="browse-btn">
+                        Choose File
+                      </button>
+                    </div>
+                    <div *ngIf="caFile != null" class="check-mark"></div>
+                    <span class="note-info">(Only PDF file is allowed and please make sure
+                      that the text is readable)</span>
+                  </div>
+                  <!-- <div class="col-lg-7 col-md-4 no-padding-l">
+                    <div class="display-flex align-center">
+                      <a href="javascript:void(0)" class="blue-link">Demo</a>
+                    </div>
+                  </div> -->
+                </div>
+                <div *ngIf="addDefaulterCAFileError != ''" class="alert alert-error-message">{{addDefaulterCAFileError}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5 col-md-8">
+                  <div class="form-group">
+                    <label>UDIN<span class="alert alert-error-message">*</span></label>
+                    <input type="text" minlength="15" pattern="^[a-zA-Z0-9]*$" maxlength="15" name="txtUDIN"
+                      [(ngModel)]="customerData.udin_no" class="form-control" #txtUDIN="ngModel"
+                      placeholder="Enter UDIN number" required>
+                    <div *ngIf="txtUDIN.invalid && (txtUDIN.dirty || txtUDIN.touched )"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtUDIN.errors?.required">UDIN is required</div>
+                      <div *ngIf="txtUDIN.errors?.minlength">UDIN must be at least 15 characters long.</div>
+                      <div *ngIf="txtUDIN.errors?.maxlength">UDIN must be at least 15 characters long.</div>
+                      <div *ngIf="txtUDIN.errors?.pattern">Invalid UDIN, only number and alphabet are allowed.</div>
+
+                    </div>
+                    <div *ngIf="addUDINError != ''" class="alert alert-error-message">{{addUDINError}}</div>
+                  </div>
+                </div>
+                <!-- <div class="col-lg-7 col-md-6 no-padding-l">
+                    <button class="blue-btn text-capitalize">Upload</button>
+                  </div> -->
+              </div>
+
+              <div class="row">
+                <div class="col-lg-5 col-md-8">
+                  <div class="form-group">
+                    <label>More Document</label>
+                    <div class="input-container">
+                      <span class="file-info" *ngIf="otherFile != null">{{otherFileName}}</span>
+                      <input type="file" id="ufOther" accept="pdf/*" (change)="handleOtherChange($event)">
+                      <button class="browse-btn">Choose File</button>
+                    </div>
+                    <div *ngIf="otherFile != null" class="check-mark" style="top: 29px;"></div>
+                    <span class="note-info"> (Only PDF file is allowed and please make sure
+                      that the text is readable)</span>
+                    <div *ngIf="addDefaulterOtherFileError != ''" class="alert alert-error-message">
+                      {{addDefaulterOtherFileError}}</div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label>Payment Due Amount<span class="alert alert-error-message">*</span>&nbsp;</label>
+                    <input type="text" name="txtDueAmount" [(ngModel)]="customerData.payment_due_amount" digitOnly
+                      #txtDueAmount="ngModel" class="form-control" placeholder="Enter due amount (INR)" required>
+                    <span class="note-info">(The amount should be greater than 10,000)</span>
+                    <div *ngIf="txtDueAmount.invalid && (txtDueAmount.dirty || txtDueAmount.touched )"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtDueAmount.errors?.required">Due Amount is required</div>
+                    </div>
+                    <div *ngIf="addDefaulterDueAmountError != ''" class="alert alert-error-message">
+                      {{addDefaulterDueAmountError}}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Payment Due Since<span class="alert alert-error-message">*</span></label>
+                    <div class="pos-rel">
+                      <input class="form-control" [maxDate]="maxDate" placeholder="Select date (dd-mm-yyyy)"
+                        name="txtDueSince" #txtDueSince="ngModel" [(ngModel)]="customerData.temp_payment_due_date"
+                        ngbDatepicker (click)="d.toggle()" [markDisabled]="isDisabled" #d="ngbDatepicker" required>
+                      <span class="calendar-icon" (click)="d.toggle()"></span>
+                    </div>
+                    <div *ngIf="txtDueSince.invalid && (txtDueSince.dirty || txtDueSince.touched )"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtDueSince.errors?.required">
+                        Due Date is required
+                      </div>
+                    </div>
+                    <div *ngIf="addDefaulterDueDateError != ''" class="alert alert-error-message">
+                      {{addDefaulterDueDateError}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="form-group">
+                    <label>Description<span class="alert alert-error-message">*</span></label>
+                    <textarea type="text" name="txtDescription" [(ngModel)]="customerData.description"
+                      #txtDescription="ngModel" class="form-control" placeholder="Add description here"
+                      required></textarea>
+                    <div *ngIf="txtDescription.invalid && (txtDescription.dirty || txtDescription.touched )"
+                      class="alert alert-error-message">
+                      <div *ngIf="txtDescription.errors?.required">
+                        Description is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Is there are legal case in court is already running related to above information?</label>
+                <div class="margin_top10">
+                  <div class="custom-radio display-inline">
+                    <input type="radio" id="test1" [value]="false" name="radiogroup"
+                      [(ngModel)]="customerData.legal_case" #radiogroup="ngModel" required>
+                    <label for="test1">No</label>
+                  </div>
+                  <div class="custom-radio display-inline">
+                    <input type="radio" id="test2" [value]="true" name="radiogroup"
+                      [(ngModel)]="customerData.legal_case" required>
+                    <label for="test2">Yes</label>
+                  </div>
+                  <div *ngIf="(radiogroup.dirty || radiogroup.touched )" class="alert alert-error-message">
+                    <div *ngIf="radiogroup.errors?.required">
+                      Legal case status in court is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="custom-hr">
+              <div class="form-group">
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="test10" name="checkbox-group" [checked]="customerData.acceptTC"
+                    (change)="customerData.acceptTC = !customerData.acceptTC" class="input-checkbox">
+
+                  <label for="test10"><span>I have read and accept all the
+                      <a href="javascript:void(0)" target="_blank" [routerLink]="['/terms-and-Conditions']"
+                        class="blue-link">Terms & Conditions</a></span></label>
+                </div>
+                <div *ngIf="addDefaulterTCError != ''" class="alert alert-error-message">{{addDefaulterTCError}}</div>
+              </div>
+              <div>
+                <button type="submit" [disabled]="!defaulterFrm.form.valid"
+                  class="blue-btn defaulter-btn pull-left">Next</button>
+                <a href="javascript:void(0)" (click)="cancelRequest(defaulterFrm)"
+                  class="transparent-btn defaulter-btn pull-right">Cancel</a>
+              </div>
+            </ng-container>
+          </form>
+        </ng-container>
+        <ng-container *ngIf="mobileVerifyStep == true ">
+          <!-- && customerData.gst_no !=null && customerData.gst_no !='' -->
+          <div class="modal-heading text-capitalize blue-text">Please Verify Mobile Number</div>
+          <form class="custom-form " name="verifyMobileFrm" #verifyMobileFrm="ngForm"
+            (ngSubmit)="verifyMobileFrm.form.valid && submitMobileVerifyStep()" novalidate>
+            <div class="row">
+              <div class="col-lg-5 col-md-8">
+                <div class="form-group">
+                  <label>One Time Password<span class="red">*</span></label>
+                  <input type="text" name="txtOTP" maxlength="6" (blur)="textChange();" required
+                    [(ngModel)]="mobileVerification.mobile_verify_otp" class="form-control" #txtOTP="ngModel"
+                    placeholder="Enter OTP">
+                  <div *ngIf="txtOTP.invalid && (txtOTP.dirty || txtOTP.touched )" class="alert alert-error-message">OTP
+                    is
+                    required</div>
+                  <div *ngIf="errorMessage" class="alert alert-error-message">{{errorMessage}}</div>
+                </div>
+                <div class="text-center margin_bottom40">
+                  <a href="javascript:void(0)" (click)="resendotp()" class="fw-600"
+                    *ngIf="!isResendButtonDisabled">Resend</a>
+                  <a href="javascript:void(0)" class="fw-600" *ngIf="isResendButtonDisabled">Resend in
+                    ({{timeLeft}}) Sec.</a>
+                  <div *ngIf="successOTPMsg" class="alert alert-success-message">{{successOTPMsg}}</div>
+                </div>
+                <div class="form-group margin_top30">
+                  <button type="submit" class="blue-btn full-width-btn"
+                    [disabled]='!verifyMobileFrm.form.valid'>Next</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

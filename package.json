@@ -30,6 +30,7 @@
     "mdn-polyfills": "^5.19.0",
     "moment": "^2.24.0",
     "ng-http-loader": "^5.1.0",
+    "ngx-clipboard": "^12.2.1",
     "ngx-owl-carousel-o": "^2.0.1",
     "ngx-toastr": "^10.0.4",
     "npm": "^6.12.0",

@@ -1,4 +1,4 @@
-<app-support-form></app-support-form>
+<!-- <app-support-form></app-support-form> -->
 <button type="button" class="close" (click)="closePopup()">
   <span aria-hidden="true">×</span>
 </button>
@@ -106,7 +106,6 @@
                 </option>
               </ng-template>
             </select>
-
             <div
               *ngIf="errorMessage && errorMessage == 'Please select business category' && customerData.category_id == '-1'"
               class="alert alert-error-message">
@@ -232,16 +231,16 @@
       </ng-container>
 
       <ng-container *ngIf="panStep">
-        <div class="modal-heading text-capitalize blue-text">Pan details</div>
+        <div class="modal-heading text-capitalize blue-text">PAN details</div>
         <form class="custom-form " name="panFrm" #panFrm="ngForm" (ngSubmit)="panFrm.form.valid && submitPanStep()"
           novalidate>
           <div class="form-group">
-            <label>Pan Card Number</label>
+            <label>PAN Card Number</label>
             <input type="text" name="txtPANNo" maxlength="10" (blur)="textChange();" required
               [(ngModel)]="customerData.pan_no" class="form-control" #txtPANNo="ngModel"
               placeholder="Enter pan card number">
             <div *ngIf="txtPANNo.invalid && (txtPANNo.dirty || txtPANNo.touched )" class="alert alert-error-message">
-              Pan card number is required.
+              PAN card number is required.
             </div>
             <div *ngIf="errorMessage" class="alert alert-error-message">
               {{errorMessage}}
@@ -275,16 +274,16 @@
                   <input type="text" name="txtReferralCode" maxlength="50" (blur)="textChange();"
                     (change)="applyReferralCode()" [(ngModel)]="customerData.referral_code" class="form-control"
                     #txtReferralCode="ngModel" placeholder="Enter referral code" required>
-                  <div *ngIf="txtReferralCode.invalid && (txtReferralCode.dirty || txtReferralCode.touched )"
+                  <div
+                    *ngIf="txtReferralCode.invalid && (txtReferralCode.dirty || txtReferralCode.touched ) && errorMessage_Referral == ''"
                     class="alert alert-error-message">
                     <div *ngIf="txtReferralCode.errors?.required">Referral code is required.</div>
                   </div>
-                </div>
-                <div *ngIf="errorMessage_Referral" class="alert alert-error-message">
-                  {{errorMessage_Referral}}
+                  <div *ngIf="errorMessage_Referral" class="alert alert-error-message">
+                    {{errorMessage_Referral}}
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
           <hr class="custom-hr">
@@ -349,6 +348,7 @@
               <div *ngIf="txtAccountNo.errors?.required">
                 Account Number is required
               </div>
+              <div *ngIf="txtAccountNo.errors?.pattern">Please enter only numbers</div>
             </div>
           </div>
           <div class="form-group">

@@ -10,13 +10,13 @@
         <div class="jq_overlay"></div>
         <app-nav-menu></app-nav-menu>
       </div>
-      <ng-container *ngIf="!authService.isAuthenticated()">
+      <ng-container *ngIf="!authService.isAuthenticated() && isAppDownloadPage == false">
         <div class="col-lg-3 col-md-5 col-7 text-right">
           <a href="javascript:void(0);" (click)="openLogin()" class="small-btn login-btn">Login</a> &nbsp;
           <a href="javascript:void(0);" class="small-btn signup-btn" (click)="openRegistration()" data-toggle="modal"
             data-target="#registerModal">Signup</a>
           <div class="mobile-inner-header">
-            <div class="mobile-inner-header-icon mobile-inner-header-icon-out jq_main_menu" >
+            <div class="mobile-inner-header-icon mobile-inner-header-icon-out jq_main_menu">
               <span></span>
               <span></span>
               <span></span>
@@ -24,7 +24,7 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="authService.isAuthenticated()">
+      <ng-container *ngIf="authService.isAuthenticated() && isAppDownloadPage == false">
         <div class="col-lg-3 col-md-5 col-7 text-right">
           <div class="custom-dropdown-menu">
             <a href="javascript:void(0)" class="jq_login_menu" (click)="toggelClass()">

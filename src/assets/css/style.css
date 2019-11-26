@@ -2956,7 +2956,8 @@ button:disabled {
 } 
 /**07-10-2019**/
 .block-wrap {
-	padding: 40px 0; 
+	padding: 40px 0;
+	margin-top: 80px; 
 }
 .block-wrap .icon {
 	max-width: 100px;
@@ -3859,4 +3860,76 @@ button:disabled {
 }
 .ml-15 {
 	margin-left: 15px !important;
+}
+.banner-wrap.app {
+    margin-top: 0px;
+}
+.copy-clipboard-btn {
+	height: 30px;
+    line-height: 30px;
+    min-width: 65px;
+    font-size: 11px;
+}
+.copy-clipboard-btn img {
+	vertical-align: -3px;
+	margin-right: 7px;
+}
+.copy-clipboard-btn:hover,
+.copy-clipboard-btn:focus {
+	background: #318fff;
+	color: #fff;
+}
+.copy-code-block {
+
+}
+.profile-right .copy-code-block div strong {
+	width: 70%;
+	display: inline-block;
+}
+.profile-right .copy-code-block div .blue-btn {
+	margin-left: 12px; 
+}
+
+/**20-11-2019**/
+.video-thumb {
+	display: flex;
+    flex-wrap: wrap;
+    margin: 15px -10px 0;
+}
+.video-thumb li {
+	padding: 0 10px;
+	width: 33.33%;
+	min-height: 180px; 
+}
+.video-thumb .video-thumb-block {
+	position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    max-height: 100px;
+}
+.video-heading {
+	font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+.dash-list ul li {
+	width: 50%;
+}
+.video-thumb .video-thumb-block .video-icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5); 
+}
+.video-thumb .video-thumb-block .video-icon img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 45px;
+	height: 45px;
+	background-size: 100%; 
 }

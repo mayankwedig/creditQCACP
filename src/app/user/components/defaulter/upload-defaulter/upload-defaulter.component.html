@@ -1,10 +1,11 @@
 <section class="rows main-sec">
   <app-side-menu></app-side-menu>
   <div class="content-wrapper">
-    <div class="main-heading display-flex align-center"><div>{{header}} Defaulter</div> 
-    <div class="ml-auto">
-      <a href="javascript:void(0)" *ngIf="nextStep" (click)="back()"
-        class="blue-btn pull-right">Back</a></div></div>
+    <div class="main-heading display-flex align-center">
+      <div>{{header}} Defaulter</div>
+      <div class="ml-auto">
+        <a href="javascript:void(0)" *ngIf="nextStep" (click)="back()" class="blue-btn pull-right">Back</a></div>
+    </div>
     <div class="upload-defaulter-sec">
       <div class="white-box pos-rel">
         <ng-container *ngIf="!nextStep && request_id==0">
@@ -156,14 +157,16 @@
               <div class="row">
                 <div class="col-lg-5 col-md-8">
                   <div class="form-group">
-                    <label>UDIN <span class="alert alert-error-message">*</span></label>
-                    <input type="text" minlength="15" maxlength="15" name="txtUDIN" [(ngModel)]="customerData.udin_no"
-                      class="form-control" #txtUDIN="ngModel" placeholder="Enter UDIN number" required>
+                    <label>UDIN<span class="alert alert-error-message">*</span></label>
+                    <input type="text" minlength="15" pattern="^[a-zA-Z0-9]*$" maxlength="15" name="txtUDIN"
+                      [(ngModel)]="customerData.udin_no" class="form-control" #txtUDIN="ngModel"
+                      placeholder="Enter UDIN number" required>
                     <div *ngIf="txtUDIN.invalid && (txtUDIN.dirty || txtUDIN.touched )"
                       class="alert alert-error-message">
                       <div *ngIf="txtUDIN.errors?.required">UDIN is required</div>
                       <div *ngIf="txtUDIN.errors?.minlength">UDIN must be at least 15 characters long.</div>
                       <div *ngIf="txtUDIN.errors?.maxlength">UDIN must be at least 15 characters long.</div>
+                      <div *ngIf="txtUDIN.errors?.pattern">Invalid UDIN, only number and alphabet are allowed.</div>
 
                     </div>
                     <div *ngIf="addUDINError != ''" class="alert alert-error-message">{{addUDINError}}</div>
@@ -515,15 +518,16 @@
               <div class="row">
                 <div class="col-lg-5 col-md-8">
                   <div class="form-group ">
-                    <label>UDIN <span class="alert alert-error-message">*</span></label>
-                    <input type="text" minlength="15" maxlength="15" [disabled]="true" name="txtUDIN"
-                      [(ngModel)]="customerData.udin_no" class="form-control disabled" #txtUDIN="ngModel"
+                    <label>UDIN<span class="alert alert-error-message">*</span></label>
+                    <input type="text" minlength="15" maxlength="15" pattern="^[a-zA-Z0-9]*$" [disabled]="true"
+                      name="txtUDIN" [(ngModel)]="customerData.udin_no" class="form-control disabled" #txtUDIN="ngModel"
                       placeholder="Enter UDIN number" required>
                     <div *ngIf="txtUDIN.invalid && (txtUDIN.dirty || txtUDIN.touched )"
                       class="alert alert-error-message">
                       <div *ngIf="txtUDIN.errors?.required">UDIN is required</div>
                       <div *ngIf="txtUDIN.errors?.minlength">UDIN must be at least 15 characters long.</div>
                       <div *ngIf="txtUDIN.errors?.maxlength">UDIN must be at least 15 characters long.</div>
+                      <div *ngIf="txtUDIN.errors?.pattern">Invalid UDIN, only number and alphabet are allowed.</div>
                     </div>
                   </div>
                 </div>
@@ -696,13 +700,15 @@
                 <div class="col-lg-5 col-md-8">
                   <div class="form-group ">
                     <label>UDIN<span class="alert alert-error-message">*</span></label>
-                    <input minlength="15" maxlength="15" type="text" name="txtUDIN" [(ngModel)]="customerData.udin_no"
-                      class="form-control" #txtUDIN="ngModel" placeholder="Enter UDIN number" required>
+                    <input minlength="15" maxlength="15" type="text" pattern="^[a-zA-Z0-9]*$" name="txtUDIN"
+                      [(ngModel)]="customerData.udin_no" class="form-control" #txtUDIN="ngModel"
+                      placeholder="Enter UDIN number" required>
                     <div *ngIf="txtUDIN.invalid && (txtUDIN.dirty || txtUDIN.touched )"
                       class="alert alert-error-message">
                       <div *ngIf="txtUDIN.errors?.required">UDIN is required</div>
                       <div *ngIf="txtUDIN.errors?.minlength">UDIN must be at least 15 characters long.</div>
                       <div *ngIf="txtUDIN.errors?.maxlength">UDIN must be at least 15 characters long.</div>
+                      <div *ngIf="txtUDIN.errors?.pattern">Invalid UDIN, only number and alphabet are allowed</div>
                     </div>
                   </div>
                 </div>

@@ -27,77 +27,78 @@ export class RouterService {
     membershipPlan: "membership-plan",
     aboutDefualter: "about-defualter",
     aboutSettlePayment: "about-settle-payment",
-    aboutCreditReport: "about-credit-report"
+    aboutCreditReport: "about-credit-report",
+    defaultedByDetails: "professional/professional-users/defaulters"
   };
 
   public RedirectDashboard() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.commonService.removeFixHeaderFromInnerPages();
     this.router.navigate(["/user/dashboard"], { skipLocationChange: false });
   }
   public RedirectMembershipPlan() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/membership-plan"], { skipLocationChange: false });
   }
   public RedirectAboutDefualter() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/about-defualter"], { skipLocationChange: false });
   }
   public RedirectAboutSettlePayment() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/about-settle-payment"], {
       skipLocationChange: false
     });
   }
   public RedirectGallery() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/gallery"], {
       skipLocationChange: false
     });
   }
   public RedirectTestimonials() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/testimonials"], {
       skipLocationChange: false
     });
   }
   public RedirectCareer() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/career"], {
       skipLocationChange: false
     });
   }
   public RedirectBlog() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/blog"], {
       skipLocationChange: false
     });
   }
   public RedirectAboutCreditReport() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/about-credit-report"], {
       skipLocationChange: false
     });
   }
   public RedirectProfile() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.commonService.removeFixHeaderFromInnerPages();
     this.router.navigate(["/user/profile"], { skipLocationChange: false });
   }
 
   public RedirectChangePassword() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.commonService.removeFixHeaderFromInnerPages();
     this.router.navigate(["/user/change-password"], {
       skipLocationChange: false
@@ -107,14 +108,14 @@ export class RouterService {
   public RedirectInvoice() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/invoice"], { skipLocationChange: false });
   }
 
   public RedirectInvoiceDetail(id) {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/invoice-detail", id], {
       skipLocationChange: false
     });
@@ -123,7 +124,7 @@ export class RouterService {
   public RedirectDefaulter(filterData = {}) {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/defaulter"], {
       queryParams: filterData,
       skipLocationChange: false
@@ -133,7 +134,7 @@ export class RouterService {
   public RedirectUploadDefaulter() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/upload-defaulter"], {
       skipLocationChange: false
     });
@@ -142,7 +143,7 @@ export class RouterService {
   public RedirectEditDefaulter(id) {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/edit-defaulter", id], {
       skipLocationChange: false
     });
@@ -151,23 +152,37 @@ export class RouterService {
   public RedirectDefaulterDetails(id, redirectUrl) {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/defaulter-details", id], {
       queryParams: { redirect: redirectUrl },
       skipLocationChange: false
     });
   }
-
+  public RedirectDefaultedByDetails(id, redirectUrl) {
+    this.commonService.removeFixHeaderFromInnerPages();
+    this.commonService.smoothScroll();
+    this.commonService.hideBreaCrumMenuOnResponsive();
+    this.router.navigate(
+      [
+        "/user/professional/professional-users/defaulters/defaulted-by-details",
+        id
+      ],
+      {
+        queryParams: { redirect: redirectUrl },
+        skipLocationChange: false
+      }
+    );
+  }
   public RedirectSettlements() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/settlements"], { skipLocationChange: false });
   }
 
   public RedirectPaymentSettlements(id, settleType = "full") {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.commonService.removeFixHeaderFromInnerPages();
     this.router.navigate(["/user/settle-payment", id], {
       queryParams: { type: settleType },
@@ -178,7 +193,7 @@ export class RouterService {
   public RedirectPendingSettlements() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/pending-settlement"], {
       skipLocationChange: false
     });
@@ -187,21 +202,21 @@ export class RouterService {
   public RedirectCQEReport() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/cir-report"], { skipLocationChange: false });
   }
 
   public RedirectRequestCQEReport() {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/cir-request"], { skipLocationChange: false });
   }
 
   public RedirectUserUrl(url) {
     this.commonService.removeFixHeaderFromInnerPages();
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/user/" + url], { skipLocationChange: false });
   }
 
@@ -217,43 +232,43 @@ export class RouterService {
 
   public RedirectHome() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/"], { skipLocationChange: false });
   }
 
   public RedirectAbout() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/about-us"], { skipLocationChange: false });
   }
 
   public RedirectContact() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/contact-us"], { skipLocationChange: false });
   }
 
   public RedirectHelp() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/help"], { skipLocationChange: false });
   }
 
   public RedirectSolution() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/solution"], { skipLocationChange: false });
   }
 
   public RedirectPrivacyPolicy() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/privacy-policy"], { skipLocationChange: false });
   }
 
   public RedirectTNC() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/terms-and-Conditions"], {
       skipLocationChange: false
     });
@@ -261,13 +276,13 @@ export class RouterService {
 
   public RedirectRNP() {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["/refund-policy"], { skipLocationChange: false });
   }
 
   public RedirectToPopup(name) {
     this.commonService.smoothScroll();
-    this.commonService.hideBreaCrumMenuOnResponsive()
+    this.commonService.hideBreaCrumMenuOnResponsive();
     this.router.navigate(["home/", name], { skipLocationChange: true });
   }
 }

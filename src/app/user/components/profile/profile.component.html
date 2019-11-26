@@ -1,8 +1,10 @@
 <section class="rows main-sec">
   <app-side-menu></app-side-menu>
   <div class="content-wrapper">
-    <div class="main-heading display-flex align-center"><div>Profile</div>
-      <div class="ml-auto"><a href="javascript:void(0);" (click)="redirectChangePassword()" class="blue-btn pull-right">Change Password</a></div>
+    <div class="main-heading display-flex align-center">
+      <div>Profile</div>
+      <div class="ml-auto"><a href="javascript:void(0);" (click)="redirectChangePassword()"
+          class="blue-btn pull-right">Change Password</a></div>
     </div>
     <div class="profile-sec ">
       <div class="white-box">
@@ -46,6 +48,22 @@
             <div class="display-flex align-center">
               <div>Email Id</div>
               <div>{{loginUser.email}}</div>
+            </div>
+            <div class="display-flex align-center copy-code-block">
+              <div>Referral code</div>
+              <div>
+                <strong>{{loginUser.referral_code}}</strong>
+                <button class="blue-btn copy-clipboard-btn" ngxClipboard [cbContent]="loginUser.referral_code"><img
+                    width="15" height="15" src="assets/img/copy.svg" />Copy</button>
+              </div>
+            </div>
+            <div class="display-flex align-center copy-code-block">
+              <div>Referral Link</div>
+              <div>
+                <strong>{{refferalLink}}</strong>
+                <button class="blue-btn copy-clipboard-btn" ngxClipboard [cbContent]="refferalLink"><img width="15"
+                    height="15" src="assets/img/copy.svg" />Copy</button>
+              </div>
             </div>
             <!-- <div class="display-flex align-center profile-action">
               <a href="#" class="blue-btn">Save</a>
@@ -152,22 +170,30 @@
                     </div>
                     <div class="form-group">
                       <label>Name</label>
-                      <input type="text" name="txtAccountName" maxlength="50" (change)="textChange()" [(ngModel)]="bankDetails.account_name" class="form-control" #txtAccountName="ngModel" placeholder="Enter account holder name" pattern="[a-zA-Z ]*" required>
-                      <div *ngIf="txtAccountName.invalid && (txtAccountName.dirty || txtAccountName.touched )" class="alert alert-error-message">
+                      <input type="text" name="txtAccountName" maxlength="50" (change)="textChange()"
+                        [(ngModel)]="bankDetails.account_name" class="form-control" #txtAccountName="ngModel"
+                        placeholder="Enter account holder name" pattern="[a-zA-Z ]*" required>
+                      <div *ngIf="txtAccountName.invalid && (txtAccountName.dirty || txtAccountName.touched )"
+                        class="alert alert-error-message">
                         <div *ngIf="txtAccountName.errors?.required">Account Name is required</div>
                         <div *ngIf="txtAccountName.errors?.pattern">Please enter only letters</div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Account Number </label>
-                      <input type="password" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" name="txtAccountNo" maxlength="20" (change)="textChange()" [(ngModel)]="bankDetails.account_no" class="form-control" #txtAccountNo="ngModel" placeholder="Enter account number" (keypress)=_keyPress($event) required>
-                      <div *ngIf="txtAccountNo.invalid && (txtAccountNo.dirty || txtAccountNo.touched )" class="alert alert-error-message">
+                      <input type="password" onCopy="return false" onDrag="return false" onDrop="return false"
+                        onPaste="return false" name="txtAccountNo" maxlength="20" (change)="textChange()"
+                        [(ngModel)]="bankDetails.account_no" class="form-control" #txtAccountNo="ngModel"
+                        placeholder="Enter account number" (keypress)=_keyPress($event) required>
+                      <div *ngIf="txtAccountNo.invalid && (txtAccountNo.dirty || txtAccountNo.touched )"
+                        class="alert alert-error-message">
                         <div *ngIf="txtAccountNo.errors?.required">Account Number is required</div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Confirm Account Number</label>
-                      <input type="text" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" name="txtConfirmAccountNo" maxlength="20" (change)="textChange()"
+                      <input type="text" onCopy="return false" onDrag="return false" onDrop="return false"
+                        onPaste="return false" name="txtConfirmAccountNo" maxlength="20" (change)="textChange()"
                         [(ngModel)]="bankDetails.confirm_account_no" class="form-control" #txtConfirmAccountNo="ngModel"
                         placeholder="Enter confirm account number" (keypress)=_keyPress($event) required>
                       <div

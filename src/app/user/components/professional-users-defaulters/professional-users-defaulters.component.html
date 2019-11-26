@@ -1,0 +1,71 @@
+<section class="rows main-sec">
+  <app-side-menu></app-side-menu>
+  <div class="content-wrapper">
+    <div class="main-heading">View Defaulters</div>
+    <div class="upload-defaulter-sec">
+      <div class="white-box">
+        <form class="custom-form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="pos-rel">
+                  <input type="text" [(ngModel)]="postData.gst_no" name="gst_no" class="form-control search-field"
+                    placeholder="Search by GST number / Trade Name">
+                  <span class="search-icon"><img src="assets/img/search.svg" /></span>
+                </div>
+              </div>
+              <div class="col-md-6 no-padding-l">
+                <button class="blue-btn text-capitalize" *ngIf="!isSearch" (click)="searchList()">Search</button>
+                &nbsp; <button *ngIf="isSearch" class="transparent-btn defaulter-btn text-capitalize"
+                  (click)="resetSearch()" style="max-width: 136px;">Reset</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="defaulter-table-sec table-responsive">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%" class="defaulter-table">
+            <thead>
+              <tr>
+                <th width="24.8%">Defaulter's Name</th>
+                <th width="14.3%">GST Number</th>
+                <th width="11.7%">Due Amount</th>
+                <th width="9.2%">Due Date</th>
+                <th width="9.2%">Uploaded date</th>
+                <th width="20.8%">Defaulted By</th>
+                <th width="9.2%">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-template ngFor let-item [ngForOf]="listData" let-i="index">
+                <tr>
+                  <td width="24.8%" data-title="Defaulter Name">{{item.trade_name}}</td>
+                  <td width="14.3%" data-title="GST Number">
+                    <a class="blue-text" href="javascript:void(0)" (click)="viewDetail(item.id)">{{item.gst_no}}</a>
+                  </td>
+                  <td width="11.7%" data-title="Due Amount"><i class="fas fa-rupee-sign"></i>{{item.payment_due_amount}}
+                  </td>
+                  <td width="9.2%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.payment_due_date)}}
+                  </td>
+                  <td width="9.2%" data-title="Uploaded date">{{dateFormatService.momentDateFormat(item.created)}}</td>
+                  <td width="20.8%" data-title="Defaulted By" class="text-capitalize"><a class="blue-text"
+                      href="javascript:void(0)" (click)="viewDefaultedByDetail(item.id)" title="View Details">An
+                      <!--  {{item.submitted_by}} this will be use later-->
+                      imaginary man</a>
+                  </td>
+                  <td width="9.2%" data-title="Status" class="text-capitalize">{{item.status | removeUnderscore}}</td>
+                </tr>
+              </ng-template>
+              <ng-container *ngIf="listData.length==0">
+                <tr>
+                  <td colspan="10">
+                    <app-no-record></app-no-record>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

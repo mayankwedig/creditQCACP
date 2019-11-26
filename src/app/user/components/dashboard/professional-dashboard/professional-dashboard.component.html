@@ -2,98 +2,152 @@
   <app-side-menu></app-side-menu>
   <div class="content-wrapper">
     <div class="main-heading">Dashboard</div>
-    <div class="dash-list">
-      <ul>
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Verified,'defaulter')">
-            <div class="white-box">
-              <div class="dash-list-icon defaulter-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label">Users</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Pending,'defaulter')">
-            <div class="white-box">
-              <div class="dash-list-icon pending-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label">Defaulters</div>
-            </div>
-          </a>
-        </li>
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <div class="full-width-video">
+          <!-- <iframe width="100%" height="320" src="https://www.youtube.com/embed/Z5ZqEyTQauY" frameborder="0"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+          <iframe #iframe width="100%" height="320" src="https://www.youtube.com/embed/Z5ZqEyTQauY" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <ul class="video-thumb">
+          <ng-container *ngFor="let videos of youtubeVideos  let i = index">
+            <li>
+              <a href="javascript:void(0);" (click)="playSelectedVideo(i)">
+                <div class="video-thumb-block">
+                  <!-- <img src="https://img.youtube.com/vi/{{videos.vidoeId}}/mqdefault.jpg" /> -->
+                  <img src="assets/img/{{videos.thumbImage}}" />
+                  <div class="video-icon"><img src="assets/img/play-button.svg" /></div>
+                </div>
+                <div class="video-heading">{{videos.title}}</div>
+              </a>
+            </li>
+          </ng-container>
 
-        <!-- <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Rejected,'defaulter')">
-            <div class="white-box">
-              <div class="dash-list-icon rejected-icon-bg"><img src="assets/img/rejected-icon.png" /></div>
-              <div class="dashbox-count">{{dashboardData.rejected}}</div>
-              <div class="dashbox-label"> Rejected Requests</div>
-            </div>
-          </a>
-        </li> -->
-        <!-- <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.RequestMoreDetails,'defaulter')">
-            <div class="white-box">
-              <div class="dash-list-icon rqm-icon-bg"><img src="assets/img/rqm-icon.png" /></div>
-              <div class="dashbox-count">{{dashboardData.moreDetailsRequested}}</div>
-              <div class="dashbox-label"> RQM Requests</div>
-            </div>
-          </a>
-        </li> -->
-        <!-- <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter('','settlement')">
-            <div class="white-box">
-              <div class="dash-list-icon view-icon-bg"><img src="assets/img/view-icon.png" /></div>
-              <div class="dashbox-count">{{dashboardData.sattelment_count}}</div>
-              <div class="dashbox-label">View all Settlements</div>
-            </div>
-          </a>
-        </li> -->
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
-            <div class="white-box">
-              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label"> Request CIR</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
-            <div class="white-box">
-              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label">Request CIR Revenue</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
-            <div class="white-box">
-              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label">Add Defaulters Revenue</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
-            <div class="white-box">
-              <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
-              <div class="dashbox-count">0</div>
-              <div class="dashbox-label">Total Revenue</div>
-            </div>
-          </a>
-        </li>
-      </ul>
+          <!--   <li>
+            <a href="javascript:void(0);" (click)="playSelectedVideo(1)">
+              <div class="video-thumb-block">
+                <img src="assets/img/settle-payment-solution.jpg" />
+                <div class="video-icon"><img src="assets/img/play-button.svg" /></div>
+              </div>
+              <div class="video-heading">How to add a defaulter</div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);">
+              <div class="video-thumb-block">
+                <img src="assets/img/settle-payment-solution.jpg" />
+                <div class="video-icon"><img src="assets/img/play-button.svg" /></div>
+              </div>
+              <div class="video-heading">How to generate CIR (Credit Information Report)</div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);">
+              <div class="video-thumb-block">
+                <img src="assets/img/settle-payment-solution.jpg" />
+                <div class="video-icon"><img src="assets/img/play-button.svg" /></div>
+              </div>
+              <div class="video-heading">How to refer</div>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="dash-list">
+          <ul>
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Verified,'defaulter')">
+                <div class="white-box">
+                  <div class="dash-list-icon defaulter-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label">Members</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Pending,'defaulter')">
+                <div class="white-box">
+                  <div class="dash-list-icon pending-icon-bg"><img src="assets/img/defaulter-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label">Defaulters</div>
+                </div>
+              </a>
+            </li>
+            <!-- <li>
+                <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.Rejected,'defaulter')">
+                  <div class="white-box">
+                    <div class="dash-list-icon rejected-icon-bg"><img src="assets/img/rejected-icon.png" /></div>
+                    <div class="dashbox-count">{{dashboardData.rejected}}</div>
+                    <div class="dashbox-label"> Rejected Requests</div>
+                  </div>
+                </a>
+              </li> -->
+            <!-- <li>
+                <a href="javascript:void(0)" (click)="redirectToDefaulter(statusEnum.RequestMoreDetails,'defaulter')">
+                  <div class="white-box">
+                    <div class="dash-list-icon rqm-icon-bg"><img src="assets/img/rqm-icon.png" /></div>
+                    <div class="dashbox-count">{{dashboardData.moreDetailsRequested}}</div>
+                    <div class="dashbox-label"> RQM Requests</div>
+                  </div>
+                </a>
+              </li> -->
+            <!-- <li>
+                <a href="javascript:void(0)" (click)="redirectToDefaulter('','settlement')">
+                  <div class="white-box">
+                    <div class="dash-list-icon view-icon-bg"><img src="assets/img/view-icon.png" /></div>
+                    <div class="dashbox-count">{{dashboardData.sattelment_count}}</div>
+                    <div class="dashbox-label">View all Settlements</div>
+                  </div>
+                </a>
+              </li> -->
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+                <div class="white-box">
+                  <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label"> Request CIR</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+                <div class="white-box">
+                  <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label">Request CIR Revenue</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+                <div class="white-box">
+                  <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label">Add Defaulters Revenue</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="redirectToDefaulter('','cirRequest')">
+                <div class="white-box">
+                  <div class="dash-list-icon processing-icon-bg"><img src="assets/img/processing-icon.png" /></div>
+                  <div class="dashbox-count">0</div>
+                  <div class="dashbox-label">Total Revenue</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
-    <!--  <div class="upload-defaulter-sec">
+    <div class="upload-defaulter-sec">
       <div class="white-box">
         <form class="custom-form">
           <div class="row">
             <div class="col-md-4 ">
-              <div class="main-subheading mt-10">Users</div>
+              <div class="main-subheading mt-10">Members</div>
             </div>
             <div class="col-md-8">
               <div class="pull-right">
@@ -154,7 +208,6 @@
           </table>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
-
 </section>

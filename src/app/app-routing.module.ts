@@ -45,7 +45,9 @@ import { CareerComponent } from "./web/components/career/career.component";
 import { BlogComponent } from "./web/components/blog/blog.component";
 import { ProfessionalDashboardComponent } from "./user/components/dashboard/professional-dashboard/professional-dashboard.component";
 import { ProfessionalUsersComponent } from "./user/components/professional-users/professional-users.component";
-import { ProfessionalUsersDedefaultersComponent } from "./user/components/professional-users-dedefaulters/professional-users-dedefaulters.component";
+import { ProfessionalUsersDefaultersComponent } from "./user/components/professional-users-defaulters/professional-users-defaulters.component";
+import { ProfessionalUsersDefaultedByDetailsComponent } from "./user/components/professional-users-defaulted-by-details/professional-users-defaulted-by-details.component";
+import { UploadUsersDefaulterComponent } from "./user/components/professional-users-defaulters/upload-users-defaulter/upload-users-defaulter.component";
 
 const routes: Routes = [
   //Web routing
@@ -297,8 +299,23 @@ const routes: Routes = [
   },
   {
     path: "user/professional/professional-users/defaulters",
-    component: ProfessionalUsersDedefaultersComponent,
+    component: ProfessionalUsersDefaultersComponent,
     data: { title: "Professional Users defaulters| CreditQ" },
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path:
+      "user/professional/professional-users/defaulters/defaulted-by-details/:id",
+    component: ProfessionalUsersDefaultedByDetailsComponent,
+    data: { title: "Defaulter Details | CreditQ" },
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "user/professional/professional-users/defaulters/upload-defaulter",
+    component: UploadUsersDefaulterComponent,
+    data: { title: "Defaulter Details | CreditQ" },
     pathMatch: "full",
     canActivate: [AuthGuard]
   },

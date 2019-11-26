@@ -16,6 +16,7 @@ import * as $ from "node_modules/jquery";
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
+  public isAppDownloadPage: boolean = false;
   public href: string = "";
   constructor(
     public authService: AuthService,
@@ -31,17 +32,19 @@ export class HeaderComponent implements OnInit {
     environment.services.files.profileImage;
   loginUser: any = {};
   showSupportForm: boolean = false;
-  toggalBreaCrumMenu(){
-    $(this).toggleClass("mobile-inner-header-icon-click mobile-inner-header-icon-out");
+  toggalBreaCrumMenu() {
+    $(this).toggleClass(
+      "mobile-inner-header-icon-click mobile-inner-header-icon-out"
+    );
     $(".main-menu").toggleClass("active");
     $(".jq_overlay").toggleClass("active");
     $("body").toggleClass("body-overflow");
   }
-  toggelClass(){
+  toggelClass() {
     $(".custom-dropdown-menu").toggleClass("open");
   }
   ngOnInit() {
-      this.sessionStorageService.userDetails.pipe().subscribe(result => {
+    this.sessionStorageService.userDetails.pipe().subscribe(result => {
       //Check user session
       if (this.localStorageService.userDetails) {
         this.loginUser = this.localStorageService.userDetails;
@@ -61,7 +64,13 @@ export class HeaderComponent implements OnInit {
     //Check for full size page
     this.router.events.subscribe(val => {
       // see also
+      var that = this;
       if (val instanceof NavigationEnd) {
+        if (val.url.includes("/ap/")) {
+          that.isAppDownloadPage = true;
+        } else {
+          that.isAppDownloadPage = false;
+        }
         if (val.url.includes("user")) {
           $("body").addClass("account-pages sidebar-page");
           $(".header-wrap").removeClass("fix");

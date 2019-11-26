@@ -71,14 +71,17 @@ import { AboutDefaulterComponent } from "./web/components/about-defaulter/about-
 import { AboutSettlePaymentComponent } from "./web/components/about-settle-payment/about-settle-payment.component";
 import { AboutCreditReportComponent } from "./web/components/about-credit-report/about-credit-report.component";
 import { CarouselModule } from "ngx-owl-carousel-o";
-import { AppHomeComponent } from './web/components/app-home/app-home.component';
-import { GalleryComponent } from './web/components/gallery/gallery.component';
-import { TestimonialsComponent } from './web/components/testimonials/testimonials.component';
-import { CareerComponent } from './web/components/career/career.component';
-import { BlogComponent } from './web/components/blog/blog.component';
-import { ProfessionalDashboardComponent } from './user/components/dashboard/professional-dashboard/professional-dashboard.component';
-import { ProfessionalUsersComponent } from './user/components/professional-users/professional-users.component';
-import { ProfessionalUsersDedefaultersComponent } from './user/components/professional-users-dedefaulters/professional-users-dedefaulters.component';
+import { AppHomeComponent } from "./web/components/app-home/app-home.component";
+import { GalleryComponent } from "./web/components/gallery/gallery.component";
+import { TestimonialsComponent } from "./web/components/testimonials/testimonials.component";
+import { CareerComponent } from "./web/components/career/career.component";
+import { BlogComponent } from "./web/components/blog/blog.component";
+import { ProfessionalDashboardComponent } from "./user/components/dashboard/professional-dashboard/professional-dashboard.component";
+import { ProfessionalUsersComponent } from "./user/components/professional-users/professional-users.component";
+import { ClipboardModule } from "ngx-clipboard";
+import { ProfessionalUsersDefaultersComponent } from "./user/components/professional-users-defaulters/professional-users-defaulters.component";
+import { ProfessionalUsersDefaultedByDetailsComponent } from './user/components/professional-users-defaulted-by-details/professional-users-defaulted-by-details.component';
+import { UploadUsersDefaulterComponent } from './user/components/professional-users-defaulters/upload-users-defaulter/upload-users-defaulter.component';
 export function tokenGetter() {
   return localStorage.getItem("auth_token");
 }
@@ -140,7 +143,9 @@ const JWT_Module_Options: JwtModuleOptions = {
     BlogComponent,
     ProfessionalDashboardComponent,
     ProfessionalUsersComponent,
-    ProfessionalUsersDedefaultersComponent
+    ProfessionalUsersDefaultersComponent,
+    ProfessionalUsersDefaultedByDetailsComponent,
+    UploadUsersDefaulterComponent
   ],
 
   entryComponents: [
@@ -152,6 +157,7 @@ const JWT_Module_Options: JwtModuleOptions = {
   ],
 
   imports: [
+    ClipboardModule,
     BrowserModule,
     CarouselModule,
     AppRoutingModule,

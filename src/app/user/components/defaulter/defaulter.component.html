@@ -45,21 +45,33 @@
                     <a class="blue-text" href="javascript:void(0)" (click)="viewDetail(item.id)">{{item.gst_no}}</a>
                   </td>
                   <td width="10.5%" data-title="Company Name">{{item.customer_no}} <br />{{item.trade_name}}</td>
-                  <td width="10.5%" data-title="Due Amount"><i class="fas fa-rupee-sign"></i>{{item.payment_due_amount}}</td>
-                  <td width="10.5%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.payment_due_date)}}</td>
+                  <td width="10.5%" data-title="Due Amount"><i class="fas fa-rupee-sign"></i>{{item.payment_due_amount}}
+                  </td>
+                  <td width="10.5%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.payment_due_date)}}
+                  </td>
                   <td width="10.5%" data-title="Due Date">{{dateFormatService.momentDateFormat(item.created)}}</td>
                   <td width="10.5%" data-title="Partial Settled Amount">
-                    <span *ngIf="item.settlement_amount != null"> <i class="fas fa-rupee-sign"></i>{{(item.settlement_amount)}}</span>
+                    <span *ngIf="item.settlement_amount != null"> <i
+                        class="fas fa-rupee-sign"></i>{{(item.settlement_amount)}}</span>
                     <span *ngIf="item.settlement_amount == null">--</span>
                   </td>
-                  <td width="10.5%" data-title="Balance" *ngIf="item.payment_due_amount-item.settlement_amount > 0"><i class="fas fa-rupee-sign"></i>{{(item.payment_due_amount-item.settlement_amount)}}</td>
-                  <td width="10.5%" data-title="Balance" *ngIf="!item.payment_due_amount-item.settlement_amount > 0">
-                    <i class="fas fa-rupee-sign"></i> 0.00
+                  <td width="10.5%" data-title="Balance"><i class="fas fa-rupee-sign"></i>
+                    <ng-container *ngIf="item.payment_due_amount-item.settlement_amount > 0">
+                      {{(item.payment_due_amount-item.settlement_amount)}}
+                    </ng-container>
+                    <ng-container *ngIf="!item.payment_due_amount-item.settlement_amount > 0">
+                      0.00
+                    </ng-container>
+                    <ng-container *ngIf="item.payment_due_amount-item.settlement_amount == 0">
+                      0.00
+                    </ng-container>
                   </td>
                   <td width="5%" data-title="Status" class="text-capitalize">{{item.status | removeUnderscore}}</td>
                   <td width="10.5%" data-title="Admin Comment" class="text-capitalize">
-                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment != ''">{{item.admin_comment}}</ng-container>
-                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment == ''">{{item.admin_comment}}</ng-container>
+                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment != ''">
+                      {{item.admin_comment}}</ng-container>
+                    <ng-container *ngIf="item.status!=statusEnum.Verified && item.admin_comment == ''">
+                      {{item.admin_comment}}</ng-container>
                     <ng-container *ngIf="item.status==statusEnum.Verified">--</ng-container>
                   </td>
                   <td width="10.5%" data-title="Settle Payment">
@@ -75,13 +87,15 @@
                             </div>
                             <div class="custom-radio">
                               <input type="radio" id="test12" name="radio-group">
-                              <label for="test12" (click)="settlement(item.id,settlementType.Partial)">Partial Payment</label>
+                              <label for="test12" (click)="settlement(item.id,settlementType.Partial)">Partial
+                                Payment</label>
                             </div>
                           </div>
                         </span>
                       </div>
                     </ng-container>
-                    <ng-container *ngIf="item.status==statusEnum.Verified && item.settlement_finish=='yes'">Settlement Completed</ng-container>
+                    <ng-container *ngIf="item.status==statusEnum.Verified && item.settlement_finish=='yes'">Settlement
+                      Completed</ng-container>
                     <ng-container *ngIf="item.status==statusEnum.RequestMoreDetails">
                       <a href="javascript:void(0)" (click)="editDefaulter(item.id)" class="blue-btn">Upload</a>
                     </ng-container>
